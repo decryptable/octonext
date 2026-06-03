@@ -11,6 +11,7 @@ import {
   faFolder,
   faGear,
   faGripVertical,
+  faHeart,
   faMagnifyingGlass,
   faStar,
   faTableColumns,
@@ -39,6 +40,7 @@ const DEFS = {
   trash: faTrash,
   bookmark: faBookmark,
   grip: faGripVertical,
+  heart: faHeart,
   file: faFile,
   folder: faFolder,
 } as const;

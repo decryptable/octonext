@@ -2,6 +2,13 @@
 
 ![CI](https://github.com/decryptable/octonext/actions/workflows/ci.yml/badge.svg)
 
+<a href="https://saweria.co/decryptable" target="_blank" rel="noreferrer">
+  <img src="public/capy_happy.svg" alt="Donate" height="56" />
+  <strong>Donate</strong>
+</a>
+
+> Support is entirely personal and voluntary — it keeps OctoNext free for everyone.
+
 A fast, clean **code tree sidebar for GitHub**, built as a Manifest V3 browser
 extension with TypeScript and [Bun](https://bun.sh). OctoNext renders a
 collapsible file tree for any repository so you can browse code without constant

@@ -1,6 +1,6 @@
 import type { RepoRef } from '../../core/types';
 import { formatSize } from '../../core/format';
-import { CSS_PREFIX } from '../../shared/constants';
+import { CSS_PREFIX, DONATE_URL } from '../../shared/constants';
 import { type IconButton, iconButton } from '../components/icon-button';
 import { h, svg } from '../dom';
 import { ICONS } from '../icons';
@@ -24,6 +24,7 @@ export function createHeader(callbacks: HeaderCallbacks): SidebarHeader {
   const branch = h('span', { class: `${CSS_PREFIX}-header__branch` });
   const size = h('span', { class: `${CSS_PREFIX}-header__size` });
   const star = iconButton('star', 'Bookmark repository', callbacks.onBookmark);
+  star.el.classList.add(`${CSS_PREFIX}-header__star`);
 
   const close = iconButton('close', 'Hide sidebar', callbacks.onClose);
   close.el.classList.add(`${CSS_PREFIX}-header__close`);
@@ -41,6 +42,7 @@ export function createHeader(callbacks: HeaderCallbacks): SidebarHeader {
     h(
       'div',
       { class: `${CSS_PREFIX}-header__actions` },
+      donateButton(),
       star.el,
       iconButton('dock', 'Switch side', callbacks.onDock).el,
       iconButton('refresh', 'Reload tree', callbacks.onRefresh).el,
@@ -60,6 +62,19 @@ export function createHeader(callbacks: HeaderCallbacks): SidebarHeader {
     },
     setBookmarked: (active) => bookmarkState(star, active),
   };
+}
+
+function donateButton(): HTMLElement {
+  return h(
+    'a',
+    {
+      class: `${CSS_PREFIX}-icon-btn ${CSS_PREFIX}-header__donate`,
+      href: DONATE_URL,
+      title: 'Support the developer',
+      attrs: { target: '_blank', rel: 'noreferrer noopener', 'aria-label': 'Donate' },
+    },
+    svg(ICONS.heart),
+  );
 }
 
 function bookmarkState(star: IconButton, active: boolean): void {

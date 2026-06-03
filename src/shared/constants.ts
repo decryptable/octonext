@@ -31,6 +31,8 @@ export const DATA_ATTR = {
 export const GITHUB_HOST = 'github.com';
 export const GITHUB_API_ORIGIN = 'https://api.github.com';
 
+export const DONATE_URL = 'https://saweria.co/decryptable';
+
 export const SIDEBAR_WIDTH = {
   min: 248,
   max: 920,

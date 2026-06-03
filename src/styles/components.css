@@ -79,3 +79,20 @@
   height: 15px;
 }
 
+
+.octonext-header__star.octonext-icon-btn--active {
+  color: #e3b341;
+}
+
+.octonext-header__star.octonext-icon-btn--active svg {
+  filter: drop-shadow(0 0 4px rgba(227, 179, 65, 0.5));
+}
+
+.octonext-header__donate {
+  color: #ff6b8a;
+}
+
+.octonext-header__donate:hover {
+  color: #ff3860;
+  background: var(--octonext-hover);
+}
