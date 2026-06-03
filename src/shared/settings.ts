@@ -12,6 +12,7 @@ export interface Settings {
   dock: DockSide;
   toggleOffset: number;
   sidebarWidth: number;
+  sidebarOpen: boolean;
   pinned: boolean;
   showInRepoOnly: boolean;
   collapseDirectories: boolean;
@@ -27,6 +28,7 @@ export const DEFAULT_SETTINGS: Settings = {
   dock: 'left',
   toggleOffset: 96,
   sidebarWidth: SIDEBAR_WIDTH.default,
+  sidebarOpen: false,
   pinned: false,
   showInRepoOnly: true,
   collapseDirectories: true,

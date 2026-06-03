@@ -10,4 +10,5 @@ export interface SidebarCallbacks {
   onWidthCommit: (width: number) => void;
   onToggleOffsetCommit: (offset: number) => void;
   onPinnedChange: (pinned: boolean) => void;
+  onOpenChange: (open: boolean) => void;
 }

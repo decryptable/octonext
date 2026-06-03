@@ -100,11 +100,16 @@ export class Sidebar {
   setPinned(pinned: boolean): void {
     this.pinned = pinned;
     document.documentElement.classList.toggle(ROOT_CLASS.pinned, pinned);
-    if (pinned) this.setOpen(true);
+    if (pinned) this.restoreOpen(true);
   }
 
   setOpen(open: boolean): void {
     if (this.open === open) return;
+    this.restoreOpen(open);
+    this.callbacks.onOpenChange(open);
+  }
+
+  restoreOpen(open: boolean): void {
     this.open = open;
     document.documentElement.classList.toggle(ROOT_CLASS.open, open);
     this.toggle.setOpen(open || this.pinned);

@@ -35,6 +35,7 @@ export class OctoNextApp {
       onWidthCommit: (sidebarWidth) => this.persist({ sidebarWidth }),
       onToggleOffsetCommit: (toggleOffset) => this.persist({ toggleOffset }),
       onPinnedChange: (pinned) => this.persist({ pinned }),
+      onOpenChange: (sidebarOpen) => this.persist({ sidebarOpen }),
     });
     this.bookmarks = new BookmarkController(this.sidebar, () => this.context);
   }
@@ -60,8 +61,8 @@ export class OctoNextApp {
   }
 
   private renderTreePanel(tree: RepoTree): void {
-    renderFiles(this.sidebar, tree, this.resolver, this.adapter, (blobs, ref, onProgress) =>
-      downloadNodes(blobs, ref, this.settings.accessToken || undefined, onProgress),
+    renderFiles(this.sidebar, tree, this.resolver, this.adapter, (blobs, ref, signal, onProgress) =>
+      downloadNodes(blobs, ref, { token: this.settings.accessToken, signal, onProgress }),
     );
   }
 
@@ -79,7 +80,6 @@ export class OctoNextApp {
   private async load(): Promise<void> {
     const context = this.context;
     if (!context) return;
-    if (!this.sidebar.isOpen()) this.sidebar.setOpen(true);
     await this.loadTree(context);
     if (context.view === 'pull') await this.loadPull(context);
   }
