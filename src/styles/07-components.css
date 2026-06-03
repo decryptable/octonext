@@ -48,10 +48,14 @@
   cursor: pointer;
 }
 
+#octonext-root svg {
+  display: block;
+  vertical-align: middle;
+}
+
 .octonext-icon-btn svg {
   width: 15px;
   height: 15px;
-  display: block;
 }
 
 .octonext-header__logo {

@@ -131,14 +131,17 @@ select.input {
 
 input[type='checkbox'] {
   appearance: none;
-  width: 17px;
-  height: 17px;
+  -webkit-appearance: none;
+  box-sizing: border-box;
+  width: 18px;
+  height: 18px;
   border: 1px solid var(--border);
   border-radius: 5px;
   background: linear-gradient(180deg, var(--card), var(--bg));
   box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.3);
   cursor: pointer;
-  position: relative;
+  display: inline-grid;
+  place-content: center;
   flex: none;
 }
 
@@ -147,16 +150,18 @@ input[type='checkbox']:checked {
   background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 80%, #fff), var(--accent));
 }
 
-input[type='checkbox']:checked::after {
+input[type='checkbox']::before {
   content: '';
-  position: absolute;
-  left: 5px;
-  top: 1px;
-  width: 5px;
-  height: 9px;
-  border: solid #fff;
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
+  width: 11px;
+  height: 11px;
+  transform: scale(0);
+  transition: transform 0.1s ease;
+  background: #fff;
+  clip-path: polygon(14% 47%, 0 60%, 39% 100%, 100% 22%, 86% 9%, 39% 71%);
+}
+
+input[type='checkbox']:checked::before {
+  transform: scale(1);
 }
 
 .field {
@@ -229,6 +234,90 @@ input[type='checkbox']:checked::after {
   gap: 10px;
   padding: 7px 0;
   cursor: pointer;
+}
+
+.sselect {
+  position: relative;
+  width: 100%;
+}
+
+.sselect__trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--card) 50%, var(--bg)), var(--bg));
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.08);
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
+.sselect__trigger::after {
+  content: '';
+  width: 12px;
+  height: 12px;
+  flex: none;
+  background: currentColor;
+  opacity: 0.5;
+  clip-path: polygon(20% 35%, 50% 65%, 80% 35%, 88% 43%, 50% 80%, 12% 43%);
+}
+
+.sselect__panel {
+  position: absolute;
+  z-index: 5;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  padding: 6px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
+}
+
+.sselect__search {
+  width: 100%;
+  padding: 7px 9px;
+  margin-bottom: 6px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: var(--card);
+  color: inherit;
+  font: inherit;
+}
+
+.sselect__list {
+  max-height: 220px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sselect__option {
+  padding: 7px 9px;
+  border: none;
+  border-radius: 7px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.sselect__option:hover {
+  background: var(--card);
+}
+
+.sselect__option[data-selected='true'] {
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  font-weight: 600;
 }
 
 .card__status {

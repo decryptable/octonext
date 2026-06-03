@@ -88,12 +88,9 @@
 
 .octonext-node__check {
   flex: none;
-  width: 13px;
-  height: 13px;
   margin: 0;
   opacity: 0;
-  cursor: pointer;
-  accent-color: var(--octonext-accent);
+  transition: opacity 0.1s ease;
 }
 
 .octonext-node:hover .octonext-node__check,
