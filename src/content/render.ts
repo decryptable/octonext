@@ -13,6 +13,7 @@ import { openDiffFile } from './pr-nav';
 export type DownloadHandler = (
   blobs: TreeNode[],
   ref: RepoTree['ref'],
+  signal: AbortSignal,
   onProgress: (p: DownloadProgress) => void,
 ) => Promise<void>;
 
@@ -32,7 +33,7 @@ export function renderFiles(
     resolver,
     resolveUrl: (node) => adapter.nodeUrl(node, tree.ref),
     onNavigate: navigateTo,
-    onDownload: (blobs, onProgress) => onDownload(blobs, tree.ref, onProgress),
+    onDownload: (blobs, signal, onProgress) => onDownload(blobs, tree.ref, signal, onProgress),
   });
   sidebar.setPanel('files', panel.el);
 }

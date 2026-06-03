@@ -9,11 +9,12 @@ function authHeaders(token?: string): HeadersInit {
   return headers;
 }
 
-export async function getJson<T>(url: string, token?: string): Promise<T> {
+export async function getJson<T>(url: string, token?: string, signal?: AbortSignal): Promise<T> {
   let response: Response;
   try {
-    response = await fetch(url, { headers: authHeaders(token) });
-  } catch {
+    response = await fetch(url, { headers: authHeaders(token), signal: signal ?? null });
+  } catch (error) {
+    if (error instanceof DOMException && error.name === 'AbortError') throw error;
     throw new GitHubApiError('Network request failed', 0);
   }
 

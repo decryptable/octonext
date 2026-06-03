@@ -11,9 +11,10 @@ export async function fetchBlobBytes(
   ref: RepoRef,
   sha: string,
   token?: string,
+  signal?: AbortSignal,
 ): Promise<Uint8Array> {
   const url = blobEndpoint(ref.host, ref.owner, ref.repo, sha);
-  const blob = await getJson<BlobResponse>(url, token);
+  const blob = await getJson<BlobResponse>(url, token, signal);
   if (blob.encoding === 'base64') return base64ToBytes(blob.content);
   return new TextEncoder().encode(blob.content);
 }

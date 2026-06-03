@@ -1,44 +1,52 @@
 import JSZip from 'jszip';
-import type { RepoRef, TreeNode } from './types';
+import { mapLimit } from './concurrency';
 import { fetchBlobBytes } from './github/blobs';
+import type { RepoRef, TreeNode } from './types';
+
+const CONCURRENCY = 8;
 
 export interface DownloadProgress {
   done: number;
   total: number;
 }
 
+export interface DownloadOptions {
+  token?: string;
+  signal?: AbortSignal;
+  onProgress?: (progress: DownloadProgress) => void;
+}
+
 export async function downloadNodes(
   blobs: TreeNode[],
   ref: RepoRef,
-  token: string | undefined,
-  onProgress?: (progress: DownloadProgress) => void,
+  options: DownloadOptions = {},
 ): Promise<void> {
   const files = blobs.filter((node) => node.type === 'blob');
   if (files.length === 0) return;
   if (files.length === 1) {
     const file = files[0]!;
-    const bytes = await fetchBlobBytes(ref, file.sha, token);
-    onProgress?.({ done: 1, total: 1 });
+    const bytes = await fetchBlobBytes(ref, file.sha, options.token, options.signal);
+    options.onProgress?.({ done: 1, total: 1 });
     saveBlob(new Blob([bytes as BlobPart]), file.name);
     return;
   }
-  await downloadZip(files, ref, token, onProgress);
+  await downloadZip(files, ref, options);
 }
 
 async function downloadZip(
   files: TreeNode[],
   ref: RepoRef,
-  token: string | undefined,
-  onProgress?: (progress: DownloadProgress) => void,
+  options: DownloadOptions,
 ): Promise<void> {
   const zip = new JSZip();
   let done = 0;
-  for (const file of files) {
-    const bytes = await fetchBlobBytes(ref, file.sha, token);
+  await mapLimit(files, CONCURRENCY, async (file) => {
+    const bytes = await fetchBlobBytes(ref, file.sha, options.token, options.signal);
     zip.file(file.path, bytes);
     done += 1;
-    onProgress?.({ done, total: files.length });
-  }
+    options.onProgress?.({ done, total: files.length });
+  });
+  if (options.signal?.aborted) return;
   const archive = await zip.generateAsync({ type: 'blob', compression: 'DEFLATE' });
   saveBlob(archive, `${ref.repo}-${ref.branch}.zip`);
 }

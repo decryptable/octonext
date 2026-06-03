@@ -14,7 +14,11 @@ export interface FilesPanelOptions {
   resolver: IconResolver;
   resolveUrl: (node: TreeNode) => string;
   onNavigate: (url: string) => void;
-  onDownload: (blobs: TreeNode[], onProgress: (p: DownloadProgress) => void) => Promise<void>;
+  onDownload: (
+    blobs: TreeNode[],
+    signal: AbortSignal,
+    onProgress: (p: DownloadProgress) => void,
+  ) => Promise<void>;
 }
 
 export class FilesPanel {
@@ -24,9 +28,13 @@ export class FilesPanel {
   private view: TreeView;
   private selection: TreeNode[] = [];
   private searchTimer: ReturnType<typeof setTimeout> | undefined;
+  private aborter: AbortController | null = null;
 
   constructor(private readonly options: FilesPanelOptions) {
-    this.bar = downloadBar(() => void this.download());
+    this.bar = downloadBar({
+      onDownload: () => void this.download(),
+      onCancel: () => this.cancel(),
+    });
     this.view = this.createView();
     this.body = h('div', { class: `${CSS_PREFIX}-files__body` }, this.view.el);
     this.el = h('div', { class: `${CSS_PREFIX}-files` }, this.toolbar(), this.body, this.bar.el);
@@ -71,6 +79,7 @@ export class FilesPanel {
     this.body.appendChild(
       resultList({
         nodes,
+        query,
         resolver: this.options.resolver,
         resolveUrl: this.options.resolveUrl,
         onNavigate: this.options.onNavigate,
@@ -79,15 +88,23 @@ export class FilesPanel {
   }
 
   private async download(): Promise<void> {
-    if (this.selection.length === 0) return;
-    this.bar.setBusy('Preparing…');
+    if (this.selection.length === 0 || this.aborter) return;
+    this.aborter = new AbortController();
+    this.bar.setProgress('Preparing…');
     try {
-      await this.options.onDownload(this.selection, (p) =>
-        this.bar.setBusy(`Downloading ${p.done}/${p.total}`),
+      await this.options.onDownload(this.selection, this.aborter.signal, (p) =>
+        this.bar.setProgress(`Downloading ${p.done}/${p.total}`),
       );
+    } catch (error) {
+      if (!(error instanceof DOMException && error.name === 'AbortError')) throw error;
     } finally {
+      this.aborter = null;
       this.bar.update(this.selection);
     }
+  }
+
+  private cancel(): void {
+    this.aborter?.abort();
   }
 
   private createView(): TreeView {
