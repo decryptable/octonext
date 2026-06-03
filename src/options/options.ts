@@ -4,26 +4,30 @@ import { FONTS } from '../shared/fonts';
 import type { Settings } from '../shared/settings';
 import { loadSettings, saveSettings } from '../shared/storage';
 import { THEMES } from '../shared/theme';
+import { type SelectItem, searchableSelect } from './select';
 
 type SelectKey = 'theme' | 'font' | 'iconPack' | 'dock';
 type ToggleKey = 'collapseDirectories' | 'showInRepoOnly' | 'pinned';
 
 const TOGGLES: ToggleKey[] = ['collapseDirectories', 'showInRepoOnly', 'pinned'];
-const SELECTS: SelectKey[] = ['theme', 'font', 'iconPack', 'dock'];
+
+const SELECT_ITEMS: Record<SelectKey, SelectItem[]> = {
+  theme: THEMES,
+  font: FONTS,
+  iconPack: [
+    { id: 'material', label: 'Material (VS Code)' },
+    { id: 'minimal', label: 'Minimal' },
+  ],
+  dock: [
+    { id: 'left', label: 'Left' },
+    { id: 'right', label: 'Right' },
+  ],
+};
 
 function byId<T extends HTMLElement>(id: string): T {
   const el = document.getElementById(id);
   if (!el) throw new Error(`Missing element #${id}`);
   return el as T;
-}
-
-function fillOptions(select: HTMLSelectElement, items: { id: string; label: string }[]): void {
-  for (const item of items) {
-    const option = document.createElement('option');
-    option.value = item.id;
-    option.textContent = item.label;
-    select.appendChild(option);
-  }
 }
 
 function flash(text: string): void {
@@ -78,12 +82,15 @@ function bindFontSize(settings: Settings): void {
 }
 
 function bindSelects(settings: Settings): void {
-  fillOptions(byId<HTMLSelectElement>('theme'), THEMES);
-  fillOptions(byId<HTMLSelectElement>('font'), FONTS);
-  for (const key of SELECTS) {
-    const select = byId<HTMLSelectElement>(key);
-    select.value = String(settings[key]);
-    select.addEventListener('change', () => void commit({ [key]: select.value }));
+  for (const key of Object.keys(SELECT_ITEMS) as SelectKey[]) {
+    const mount = byId<HTMLElement>(key);
+    mount.appendChild(
+      searchableSelect({
+        items: SELECT_ITEMS[key],
+        value: String(settings[key]),
+        onChange: (id) => void commit({ [key]: id }),
+      }),
+    );
   }
 }
 

@@ -31,25 +31,15 @@
 
       <section class="card">
         <h2 class="card__title">Appearance</h2>
-        <label class="field"><span>Theme</span><select id="theme" class="input"></select></label>
-        <label class="field"><span>Font</span><select id="font" class="input"></select></label>
+        <div class="field"><span>Theme</span><div id="theme" class="select-mount"></div></div>
+        <div class="field"><span>Font</span><div id="font" class="select-mount"></div></div>
         <label class="field">
           <span>Font size</span>
           <input id="fontSize" class="range" type="range" />
           <output id="fontSizeValue" class="field__value"></output>
         </label>
-        <label class="field"><span>File icons</span>
-          <select id="iconPack" class="input">
-            <option value="material">Material (VS Code)</option>
-            <option value="minimal">Minimal</option>
-          </select>
-        </label>
-        <label class="field"><span>Dock side</span>
-          <select id="dock" class="input">
-            <option value="left">Left</option>
-            <option value="right">Right</option>
-          </select>
-        </label>
+        <div class="field"><span>File icons</span><div id="iconPack" class="select-mount"></div></div>
+        <div class="field"><span>Dock side</span><div id="dock" class="select-mount"></div></div>
       </section>
 
       <section class="card">
