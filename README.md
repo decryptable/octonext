@@ -15,6 +15,11 @@ page loads. Everything runs locally — there is **no backend and no telemetry**
 - **Fonts** — pick from bundled coding fonts (JetBrains Mono, Fira Code, …) or
   system fonts
 - **Search** files by name with instant filtering
+- **Download** any selection via checkboxes — a single file downloads directly,
+  multiple files or folders download as a ZIP that mirrors the repository paths
+  (empty folders are skipped)
+- **Sizes** — total repository size in the header, plus per-folder and per-file
+  sizes in the tree
 - **Bookmarks** — save repositories locally and jump back any time
 - **Pull request panel** — changed files and review comments, click to jump to
   the diff or comment
@@ -47,10 +52,15 @@ bun run build      # outputs the unpacked extension to dist/
 bun run package
 ```
 
-Produces store-ready archives in `release/`:
+Produces store-ready and self-distribution artifacts in `release/`:
 
 - `octonext-chrome-vX.Y.Z.zip` — Chrome Web Store (MV3, service worker)
-- `octonext-firefox-vX.Y.Z.zip` — Firefox Add-ons (MV3, `browser_specific_settings`)
+- `octonext-chrome-vX.Y.Z.crx` — signed CRX3 for direct Chrome install
+- `octonext-firefox-vX.Y.Z.zip` — Firefox Add-ons upload
+- `octonext-firefox-vX.Y.Z.xpi` — installable Firefox package
+
+The CRX is signed with a key in `keys/octonext.pem`, generated on first run and
+kept out of version control. Keep it safe to preserve a stable extension ID.
 
 ## Development
 

@@ -1,7 +1,11 @@
 node_modules/
 dist/
 release/
+keys/
 *.zip
+*.crx
+*.xpi
+*.pem
 
 bun.lockb
 .DS_Store
