@@ -1,0 +1,69 @@
+#octonext-root[data-octonext-theme='retro'] {
+  --octonext-bg: #2b2117;
+  --octonext-fg: #f4e4c1;
+  --octonext-muted: #b89b6e;
+  --octonext-border: #5c4a32;
+  --octonext-hover: #3a2e1f;
+  --octonext-active: #4a3a26;
+  --octonext-accent: #e8a33d;
+  --octonext-add: #9cb35a;
+  --octonext-del: #d4663f;
+  --octonext-shadow: rgba(0, 0, 0, 0.55);
+}
+
+#octonext-root[data-octonext-theme='retro'] .octonext-sidebar {
+  font-family: 'Courier New', monospace;
+  text-shadow: 0 0 2px rgba(232, 163, 61, 0.35);
+}
+
+#octonext-root[data-octonext-theme='retro'] .octonext-sidebar::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    rgba(0, 0, 0, 0) 0,
+    rgba(0, 0, 0, 0) 2px,
+    rgba(0, 0, 0, 0.18) 3px
+  );
+  animation: octonext-scan 6s linear infinite;
+}
+
+@keyframes octonext-scan {
+  to {
+    background-position: 0 120px;
+  }
+}
+
+#octonext-root[data-octonext-theme='retro'] .octonext-node--active {
+  background: var(--octonext-active);
+  box-shadow: inset 0 0 0 1px var(--octonext-accent);
+}
+
+#octonext-root[data-octonext-theme='retro'] .octonext-node--pulse > .octonext-node__icon-box {
+  animation: octonext-retro-flick 0.36s steps(2) both;
+}
+
+@keyframes octonext-retro-flick {
+  25% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+#octonext-root[data-octonext-theme='retro'] .octonext-node__children--opening > .octonext-node {
+  animation: octonext-retro-type 0.24s steps(4) both;
+}
+
+@keyframes octonext-retro-type {
+  from {
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}

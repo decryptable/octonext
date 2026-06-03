@@ -1,0 +1,12 @@
+#octonext-root[data-octonext-theme='nord'] {
+  --octonext-bg: #2e3440;
+  --octonext-fg: #d8dee9;
+  --octonext-muted: #7b88a1;
+  --octonext-border: #3b4252;
+  --octonext-hover: #3b4252;
+  --octonext-active: #434c5e;
+  --octonext-accent: #a3be8c;
+  --octonext-add: #a3be8c;
+  --octonext-del: #bf616a;
+  --octonext-shadow: rgba(0,0,0,0.5);
+}

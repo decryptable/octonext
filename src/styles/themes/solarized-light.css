@@ -1,0 +1,12 @@
+#octonext-root[data-octonext-theme='solarized-light'] {
+  --octonext-bg: #fdf6e3;
+  --octonext-fg: #586e75;
+  --octonext-muted: #93a1a1;
+  --octonext-border: #eee8d5;
+  --octonext-hover: #eee8d5;
+  --octonext-active: #d9e8c5;
+  --octonext-accent: #859900;
+  --octonext-add: #859900;
+  --octonext-del: #dc322f;
+  --octonext-shadow: rgba(101,123,131,0.2);
+}

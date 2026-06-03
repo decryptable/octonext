@@ -1,0 +1,50 @@
+.octonext-ripple {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  pointer-events: none;
+  background: color-mix(in srgb, var(--octonext-accent) 45%, transparent);
+  animation: octonext-ripple 0.45s ease-out forwards;
+}
+
+@keyframes octonext-ripple {
+  to {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+.octonext-icon-btn,
+.octonext-dl__button,
+.octonext-toggle,
+.octonext-tab {
+  position: relative;
+  overflow: hidden;
+}
+
+.octonext-node__children--opening > .octonext-node {
+  animation: octonext-row-in 0.22s ease both;
+}
+
+@keyframes octonext-row-in {
+  from {
+    opacity: 0;
+    transform: translateX(-6px);
+  }
+}
+
+.octonext-node--pulse > .octonext-node__icon-box {
+  animation: octonext-pulse 0.4s ease;
+}
+
+@keyframes octonext-pulse {
+  40% {
+    transform: scale(1.25);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #octonext-root * {
+    animation-duration: 0.001ms !important;
+  }
+}

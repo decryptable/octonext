@@ -1,0 +1,12 @@
+#octonext-root[data-octonext-theme='dark-dimmed'] {
+  --octonext-bg: #22272e;
+  --octonext-fg: #adbac7;
+  --octonext-muted: #768390;
+  --octonext-border: #444c56;
+  --octonext-hover: #2d333b;
+  --octonext-active: #2e4c6b;
+  --octonext-accent: #57ab5a;
+  --octonext-add: #57ab5a;
+  --octonext-del: #e5534b;
+  --octonext-shadow: rgba(1,4,9,0.5);
+}

@@ -1,9 +1,10 @@
 import { watch as watchFs } from 'node:fs';
-import { mkdir, readdir, rm } from 'node:fs/promises';
+import { mkdir, rm } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { type BuildTarget, buildManifest } from '../src/manifest.config';
 import { copyAppIcons, copyFileIcons, copyFonts, copyOptions } from './assets';
-import { DIST_DIR, SRC_DIR, STYLES_DIR, fromRoot } from './paths';
+import { DIST_DIR, SRC_DIR, fromRoot } from './paths';
+import { collectStyles } from './styles';
 
 const WATCH = process.argv.includes('--watch');
 
@@ -28,9 +29,7 @@ async function bundleScripts(minify: boolean): Promise<void> {
 }
 
 async function bundleStyles(): Promise<void> {
-  const files = (await readdir(STYLES_DIR)).filter((f) => f.endsWith('.css')).sort();
-  const parts = await Promise.all(files.map((f) => Bun.file(resolve(STYLES_DIR, f)).text()));
-  await Bun.write(resolve(DIST_DIR, 'content.css'), parts.join('\n'));
+  await Bun.write(resolve(DIST_DIR, 'content.css'), await collectStyles());
 }
 
 async function writeManifest(target: BuildTarget): Promise<void> {

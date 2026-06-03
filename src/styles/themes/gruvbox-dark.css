@@ -1,0 +1,12 @@
+#octonext-root[data-octonext-theme='gruvbox-dark'] {
+  --octonext-bg: #282828;
+  --octonext-fg: #ebdbb2;
+  --octonext-muted: #a89984;
+  --octonext-border: #3c3836;
+  --octonext-hover: #32302f;
+  --octonext-active: #45403d;
+  --octonext-accent: #b8bb26;
+  --octonext-add: #b8bb26;
+  --octonext-del: #fb4934;
+  --octonext-shadow: rgba(0,0,0,0.5);
+}

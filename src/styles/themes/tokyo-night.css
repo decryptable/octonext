@@ -1,0 +1,12 @@
+#octonext-root[data-octonext-theme='tokyo-night'] {
+  --octonext-bg: #1a1b26;
+  --octonext-fg: #a9b1d6;
+  --octonext-muted: #565f89;
+  --octonext-border: #24283b;
+  --octonext-hover: #1f2335;
+  --octonext-active: #28344a;
+  --octonext-accent: #9ece6a;
+  --octonext-add: #9ece6a;
+  --octonext-del: #f7768e;
+  --octonext-shadow: rgba(0,0,0,0.5);
+}

@@ -1,0 +1,12 @@
+#octonext-root[data-octonext-theme='monokai'] {
+  --octonext-bg: #272822;
+  --octonext-fg: #f8f8f2;
+  --octonext-muted: #75715e;
+  --octonext-border: #3e3d32;
+  --octonext-hover: #31322a;
+  --octonext-active: #49483e;
+  --octonext-accent: #a6e22e;
+  --octonext-add: #a6e22e;
+  --octonext-del: #f92672;
+  --octonext-shadow: rgba(0,0,0,0.5);
+}

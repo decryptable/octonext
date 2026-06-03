@@ -1,0 +1,12 @@
+#octonext-root[data-octonext-theme='dracula'] {
+  --octonext-bg: #282a36;
+  --octonext-fg: #f8f8f2;
+  --octonext-muted: #6272a4;
+  --octonext-border: #44475a;
+  --octonext-hover: #343746;
+  --octonext-active: #44475a;
+  --octonext-accent: #50fa7b;
+  --octonext-add: #50fa7b;
+  --octonext-del: #ff5555;
+  --octonext-shadow: rgba(0,0,0,0.5);
+}

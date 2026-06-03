@@ -1,0 +1,68 @@
+#octonext-root[data-octonext-theme='hacking'] {
+  --octonext-bg: #03120a;
+  --octonext-fg: #36ff8b;
+  --octonext-muted: #1f8a4c;
+  --octonext-border: #0c3b21;
+  --octonext-hover: #07210f;
+  --octonext-active: #0c3b21;
+  --octonext-accent: #39ff14;
+  --octonext-add: #39ff14;
+  --octonext-del: #ff3860;
+  --octonext-shadow: rgba(57, 255, 20, 0.18);
+}
+
+#octonext-root[data-octonext-theme='hacking'] .octonext-sidebar {
+  font-family: 'Courier New', monospace;
+  text-shadow: 0 0 4px rgba(57, 255, 20, 0.5);
+}
+
+#octonext-root[data-octonext-theme='hacking'] .octonext-header__repo::after {
+  content: '_';
+  animation: octonext-caret 1s steps(1) infinite;
+}
+
+@keyframes octonext-caret {
+  50% {
+    opacity: 0;
+  }
+}
+
+#octonext-root[data-octonext-theme='hacking'] .octonext-node:hover {
+  box-shadow: inset 3px 0 0 var(--octonext-accent);
+  text-shadow: 0 0 8px var(--octonext-accent);
+}
+
+#octonext-root[data-octonext-theme='hacking'] .octonext-node--pulse > .octonext-node__icon-box {
+  animation: octonext-glitch 0.34s steps(2) both;
+}
+
+@keyframes octonext-glitch {
+  20% {
+    transform: translate(-2px, 1px);
+    filter: hue-rotate(90deg);
+  }
+  60% {
+    transform: translate(2px, -1px);
+  }
+}
+
+#octonext-root[data-octonext-theme='hacking'] .octonext-ripple {
+  background: var(--octonext-accent);
+  mix-blend-mode: screen;
+}
+
+#octonext-root[data-octonext-theme='hacking'] .octonext-node__children--opening > .octonext-node {
+  animation: octonext-hack-in 0.2s steps(3) both;
+}
+
+@keyframes octonext-hack-in {
+  from {
+    opacity: 0;
+    transform: translateX(-10px) skewX(12deg);
+  }
+}
+
+#octonext-root[data-octonext-theme='hacking'] .octonext-mark {
+  background: var(--octonext-accent);
+  color: #03120a;
+}
