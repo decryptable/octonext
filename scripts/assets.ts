@@ -40,7 +40,7 @@ async function writeIconManifest(root: string): Promise<void> {
   trimmed.definitions = Object.fromEntries(
     Object.entries(definitions).map(([name, def]) => [name, fileBase(def.iconPath)]),
   );
-  await Bun.write(resolve(DIST_DIR, 'icons/material/manifest.json'), JSON.stringify(trimmed));
+  await Bun.write(resolve(DIST_DIR, 'icons/material/icons.json'), JSON.stringify(trimmed));
 }
 
 export async function copyFileIcons(): Promise<void> {

@@ -1,4 +1,4 @@
-import JSZip from 'jszip';
+import { type Zippable, zip } from 'fflate';
 import { mapLimit } from './concurrency';
 import { fetchBlobBytes } from './github/blobs';
 import type { RepoRef, TreeNode } from './types';
@@ -38,17 +38,23 @@ async function downloadZip(
   ref: RepoRef,
   options: DownloadOptions,
 ): Promise<void> {
-  const zip = new JSZip();
+  const entries: Zippable = {};
   let done = 0;
   await mapLimit(files, CONCURRENCY, async (file) => {
     const bytes = await fetchBlobBytes(ref, file.sha, options.token, options.signal);
-    zip.file(file.path, bytes);
+    entries[file.path] = bytes;
     done += 1;
     options.onProgress?.({ done, total: files.length });
   });
   if (options.signal?.aborted) return;
-  const archive = await zip.generateAsync({ type: 'blob', compression: 'DEFLATE' });
-  saveBlob(archive, `${ref.repo}-${ref.branch}.zip`);
+  const archive = await zipArchive(entries);
+  saveBlob(new Blob([archive as BlobPart]), `${ref.repo}-${ref.branch}.zip`);
+}
+
+function zipArchive(entries: Zippable): Promise<Uint8Array> {
+  return new Promise((resolveZip, reject) => {
+    zip(entries, { level: 6 }, (error, data) => (error ? reject(error) : resolveZip(data)));
+  });
 }
 
 function saveBlob(blob: Blob, fileName: string): void {

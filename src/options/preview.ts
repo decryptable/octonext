@@ -1,7 +1,7 @@
 import { ELEMENT_IDS } from '../shared/constants';
 import { injectFontFaces, resolveFont } from '../shared/fonts';
 import { applyTheme } from '../shared/theme';
-import { h } from '../ui/dom';
+import { h, svg } from '../ui/dom';
 
 const P = 'octonext';
 
@@ -28,7 +28,7 @@ function header(): HTMLElement {
   return h(
     'div',
     { class: `${P}-header` },
-    h('span', { class: `${P}-header__logo`, html: LOGO }),
+    svg(LOGO, `${P}-header__logo`),
     h('span', { class: `${P}-header__title`, text: 'OctoNext' }),
     h('span', { class: `${P}-header__size`, text: '4.2 MB' }),
   );

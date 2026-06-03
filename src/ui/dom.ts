@@ -3,7 +3,6 @@ type Child = Node | string | number | false | null | undefined;
 export interface ElementProps {
   class?: string;
   text?: string;
-  html?: string;
   title?: string;
   href?: string;
   type?: string;
@@ -21,7 +20,6 @@ export function h<K extends keyof HTMLElementTagNameMap>(
   const el = document.createElement(tag);
   if (props.class) el.className = props.class;
   if (props.text != null) el.textContent = props.text;
-  if (props.html != null) el.innerHTML = props.html;
   if (props.title != null) el.title = props.title;
   if (props.href != null) el.setAttribute('href', props.href);
   if (props.type != null) el.setAttribute('type', props.type);
@@ -47,9 +45,8 @@ export function clear(node: Node): void {
 }
 
 export function svg(markup: string, className?: string): SVGElement {
-  const tmp = document.createElement('div');
-  tmp.innerHTML = markup;
-  const node = tmp.firstElementChild as SVGElement;
+  const parsed = new DOMParser().parseFromString(markup, 'image/svg+xml').documentElement;
+  const node = document.importNode(parsed, true) as unknown as SVGElement;
   if (className) node.setAttribute('class', className);
   return node;
 }

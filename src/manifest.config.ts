@@ -35,7 +35,11 @@ export function buildManifest(
       ...base,
       background: { scripts: ['background.js'] },
       browser_specific_settings: {
-        gecko: { id: 'octonext@decryptable.github.io', strict_min_version: '128.0' },
+        gecko: {
+          id: 'octonext@decryptable.github.io',
+          strict_min_version: '128.0',
+          data_collection_permissions: { required: ['none'] },
+        },
       },
     } as unknown as chrome.runtime.ManifestV3;
   }

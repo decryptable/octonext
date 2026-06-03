@@ -46,7 +46,7 @@ export const FONT_SIZE = {
 } as const;
 
 export const ASSET_PATHS = {
-  iconManifest: 'icons/material/manifest.json',
+  iconManifest: 'icons/material/icons.json',
   materialDir: 'icons/material',
   fontsDir: 'fonts',
 } as const;

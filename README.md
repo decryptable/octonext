@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="public/banner.svg" alt="OctoNext — a fast, clean code tree sidebar for GitHub" width="100%" />
+<a href="#"><img src="public/banner.svg" alt="OctoNext — a fast, clean code tree sidebar for GitHub" width="100%" /></a>
 
 <br />
 
@@ -20,11 +20,11 @@ constant page loads. Everything runs locally: **no backend, no telemetry.**
 
 <br />
 
-![Themes](https://img.shields.io/badge/themes-17-a371f7?style=flat-square)
-![Fonts](https://img.shields.io/badge/fonts-8-a371f7?style=flat-square)
-![Files](https://img.shields.io/badge/source%20files-130-30363d?style=flat-square)
-![Max file](https://img.shields.io/badge/max%20file-130%20lines-30363d?style=flat-square)
-![Tests](https://img.shields.io/badge/unit%20tests-37%20passing-2da44e?style=flat-square)
+[![Themes](https://img.shields.io/badge/themes-17-a371f7?style=flat-square)](#themes)
+[![Fonts](https://img.shields.io/badge/fonts-8-a371f7?style=flat-square)](#)
+[![Files](https://img.shields.io/badge/source%20files-130-30363d?style=flat-square)](#)
+[![Max file](https://img.shields.io/badge/max%20file-130%20lines-30363d?style=flat-square)](#)
+[![Tests](https://img.shields.io/badge/unit%20tests-37%20passing-2da44e?style=flat-square)](https://github.com/decryptable/octonext/actions/workflows/ci.yml)
 
 <br />
 
@@ -54,24 +54,20 @@ it is saved and lives in `chrome.storage` — it never goes anywhere else.
 
 <div align="center">
 
-<a href="https://github.com/decryptable/octonext">
-  <img height="150" src="https://github-readme-stats.vercel.app/api/pin/?username=decryptable&repo=octonext&theme=github_dark&hide_border=true&bg_color=0d1117&title_color=3fb950&icon_color=3fb950&text_color=adbac7" alt="OctoNext repository card" />
-</a>
-<a href="https://github.com/decryptable/octonext/graphs/contributors">
-  <img height="150" src="https://github-readme-stats.vercel.app/api/top-langs/?username=decryptable&repo=octonext&layout=compact&theme=github_dark&hide_border=true&bg_color=0d1117&title_color=3fb950&text_color=adbac7&langs_count=8" alt="Language breakdown" />
-</a>
-
-<br /><br />
+[![Created](https://img.shields.io/github/created-at/decryptable/octonext?style=for-the-badge&logo=github&label=created&color=2da44e&labelColor=0d1117)](https://github.com/decryptable/octonext)
+[![Last commit](https://img.shields.io/github/last-commit/decryptable/octonext?style=for-the-badge&logo=git&color=8957e5&labelColor=0d1117)](https://github.com/decryptable/octonext/commits)
+[![Commit activity](https://img.shields.io/github/commit-activity/m/decryptable/octonext?style=for-the-badge&logo=github&color=f0883e&labelColor=0d1117)](https://github.com/decryptable/octonext/graphs/commit-activity)
+[![Contributors](https://img.shields.io/github/contributors/decryptable/octonext?style=for-the-badge&logo=github&color=db61a2&labelColor=0d1117)](https://github.com/decryptable/octonext/graphs/contributors)
 
 [![Stars](https://img.shields.io/github/stars/decryptable/octonext?style=for-the-badge&logo=github&color=2da44e&labelColor=0d1117)](https://github.com/decryptable/octonext/stargazers)
 [![Forks](https://img.shields.io/github/forks/decryptable/octonext?style=for-the-badge&logo=github&color=2da44e&labelColor=0d1117)](https://github.com/decryptable/octonext/network/members)
 [![Issues](https://img.shields.io/github/issues/decryptable/octonext?style=for-the-badge&logo=github&color=3fb950&labelColor=0d1117)](https://github.com/decryptable/octonext/issues)
 [![Pull requests](https://img.shields.io/github/issues-pr/decryptable/octonext?style=for-the-badge&logo=github&color=3fb950&labelColor=0d1117)](https://github.com/decryptable/octonext/pulls)
 
-![Last commit](https://img.shields.io/github/last-commit/decryptable/octonext?style=for-the-badge&logo=git&color=8957e5&labelColor=0d1117)
-![Repo size](https://img.shields.io/github/repo-size/decryptable/octonext?style=for-the-badge&logo=files&color=58a6ff&labelColor=0d1117)
-![Top language](https://img.shields.io/github/languages/top/decryptable/octonext?style=for-the-badge&logo=typescript&color=3178c6&labelColor=0d1117)
-![Commit activity](https://img.shields.io/github/commit-activity/m/decryptable/octonext?style=for-the-badge&logo=github&color=f0883e&labelColor=0d1117)
+[![Top language](https://img.shields.io/github/languages/top/decryptable/octonext?style=for-the-badge&logo=typescript&color=3178c6&labelColor=0d1117)](#tech-stack)
+[![Languages](https://img.shields.io/github/languages/count/decryptable/octonext?style=for-the-badge&label=languages&logo=github&color=a371f7&labelColor=0d1117)](#)
+[![Code size](https://img.shields.io/github/languages/code-size/decryptable/octonext?style=for-the-badge&logo=files&color=58a6ff&labelColor=0d1117)](#)
+[![Repo size](https://img.shields.io/github/repo-size/decryptable/octonext?style=for-the-badge&logo=files&color=58a6ff&labelColor=0d1117)](#)
 
 </div>
 
