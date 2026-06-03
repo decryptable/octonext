@@ -1,5 +1,5 @@
-import { expect, test } from 'bun:test'
-import { parseRepoContext, sameRepo } from '../src/core/adapters/repo-context'
+import { expect, test } from 'bun:test';
+import { parseRepoContext, sameRepo } from '../src/core/adapters/repo-context';
 
 const parse = (path: string) =>
   parseRepoContext(new URL(`https://github.com${path}`), 'github.com');
