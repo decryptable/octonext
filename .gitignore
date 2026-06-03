@@ -1,0 +1,16 @@
+node_modules/
+dist/
+*.zip
+
+bun.lockb
+.DS_Store
+Thumbs.db
+
+.idea/
+.vscode/*
+!.vscode/extensions.json
+.claude/
+
+# Reference material from the original bundled extension (not redistributed)
+ext/
+.recon/

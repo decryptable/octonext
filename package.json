@@ -1,0 +1,37 @@
+{
+  "name": "octonext",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A clean, modular browser extension that adds a code tree sidebar to GitHub.",
+  "author": "decryptable (https://github.com/decryptable)",
+  "license": "MIT",
+  "homepage": "https://github.com/decryptable/octonext",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/decryptable/octonext.git"
+  },
+  "type": "module",
+  "engines": {
+    "bun": ">=1.2.0"
+  },
+  "scripts": {
+    "build": "bun run scripts/build.ts",
+    "dev": "bun run scripts/build.ts --watch",
+    "icons": "bun run scripts/generate-icons.ts",
+    "test": "bun test",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write \"src/**/*.ts\" \"scripts/**/*.ts\" \"tests/**/*.ts\"",
+    "format:check": "prettier --check \"src/**/*.ts\" \"scripts/**/*.ts\" \"tests/**/*.ts\"",
+    "clean": "bun run scripts/clean.ts"
+  },
+  "dependencies": {
+    "webextension-polyfill": "^0.12.0"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.3.14",
+    "@types/chrome": "^0.0.287",
+    "@types/webextension-polyfill": "^0.12.1",
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.3"
+  }
+}
