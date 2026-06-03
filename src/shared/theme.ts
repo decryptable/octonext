@@ -18,6 +18,11 @@ export const THEMES: ThemeOption[] = [
   { id: 'solarized-dark', label: 'Solarized Dark' },
   { id: 'gruvbox-dark', label: 'Gruvbox Dark' },
   { id: 'tokyo-night', label: 'Tokyo Night' },
+  { id: 'pixel', label: 'Pixel ✨' },
+  { id: 'cute', label: 'Cute 🌸' },
+  { id: 'retro', label: 'Retro CRT 📺' },
+  { id: 'hacking', label: 'Hacker 💻' },
+  { id: 'synthwave', label: 'Synthwave 🌆' },
 ];
 
 const THEME_IDS = new Set(THEMES.map((theme) => theme.id));
