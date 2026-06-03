@@ -75,8 +75,6 @@ it is saved and lives in `chrome.storage` — it never goes anywhere else.
 
 </div>
 
-> The cards above populate automatically once the repository is public.
-
 <br />
 
 <details open>
