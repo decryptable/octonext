@@ -6,7 +6,6 @@ const STYLE = 'color:#2dba4e;font-weight:bold';
 const PREFIX = `%c${APP_NAME}`;
 
 function emit(level: Level, args: unknown[]): void {
-  // eslint-disable-next-line no-console
   console[level](PREFIX, STYLE, ...args);
 }
 

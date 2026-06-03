@@ -1,0 +1,42 @@
+.octonext-results {
+  display: flex;
+  flex-direction: column;
+  padding: 4px 0;
+  font-size: var(--octonext-font-size, 13px);
+}
+
+.octonext-result {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  cursor: pointer;
+}
+
+.octonext-result:hover {
+  background: var(--octonext-hover);
+}
+
+.octonext-result__text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.octonext-result__name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.octonext-result__path {
+  color: var(--octonext-muted);
+  font-size: 11px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.octonext-results__empty {
+  padding: 24px 12px;
+  text-align: center;
+  color: var(--octonext-muted);
+}

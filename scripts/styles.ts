@@ -6,6 +6,7 @@ const CORE_ORDER = [
   'sidebar.css',
   'tabs.css',
   'tree.css',
+  'results.css',
   'panels.css',
   'toggle.css',
   'components.css',

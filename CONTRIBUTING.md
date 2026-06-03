@@ -32,7 +32,12 @@ or update tests under `tests/` when you change that logic.
 ```bash
 bun run test
 bun run typecheck
+bun run lint:structure
 ```
+
+`lint:structure` enforces the project conventions automatically: every file
+(including CSS) must be ≤130 lines, contain no comments, and use lowercase
+kebab-case names. CI runs it on every pull request, so run it locally first.
 
 ## Commits
 

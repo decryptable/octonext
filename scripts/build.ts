@@ -28,8 +28,12 @@ async function bundleScripts(minify: boolean): Promise<void> {
   }
 }
 
-async function bundleStyles(): Promise<void> {
-  await Bun.write(resolve(DIST_DIR, 'content.css'), await collectStyles());
+async function bundleStyles(minify: boolean): Promise<void> {
+  const out = resolve(DIST_DIR, 'content.css');
+  await Bun.write(out, await collectStyles());
+  if (!minify) return;
+  const result = await Bun.build({ entrypoints: [out], minify: true });
+  if (result.success) await Bun.write(out, result.outputs[0]!);
 }
 
 async function writeManifest(target: BuildTarget): Promise<void> {
@@ -39,7 +43,12 @@ async function writeManifest(target: BuildTarget): Promise<void> {
 }
 
 async function rebuildCode(minify: boolean, target: BuildTarget): Promise<void> {
-  await Promise.all([bundleScripts(minify), bundleStyles(), writeManifest(target), copyOptions()]);
+  await Promise.all([
+    bundleScripts(minify),
+    bundleStyles(minify),
+    writeManifest(target),
+    copyOptions(),
+  ]);
 }
 
 export async function buildAll(target: BuildTarget = 'chrome', minify = true): Promise<void> {
