@@ -12,16 +12,18 @@ interface MatchingRef {
   object: { sha: string };
 }
 
+const defaultBranchCache = new Map<string, string>();
+
 export async function resolveRef(context: RepoContext, token?: string): Promise<ResolvedRef> {
-  const { host, owner, repo } = context;
-  if (!context.rawRef) {
-    const info = await getJson<{ default_branch: string }>(repoEndpoint(host, owner, repo), token);
-    return { branch: info.default_branch, sha: info.default_branch, path: '' };
+  const branch = await defaultBranch(context, token);
+  if (!context.rawRef) return { branch, sha: branch, path: '' };
+
+  if (context.rawRef === branch || context.rawRef.startsWith(`${branch}/`)) {
+    return { branch, sha: branch, path: context.rawRef.slice(branch.length + 1) };
   }
 
   const prefix = context.rawRef.split('/')[0]!;
-  const refs = await listRefs(context, prefix, token);
-  const match = matchRef(refs, context.rawRef);
+  const match = matchRef(await listRefs(context, prefix, token), context.rawRef);
   if (match) {
     return {
       branch: match.name,
@@ -31,7 +33,17 @@ export async function resolveRef(context: RepoContext, token?: string): Promise<
   }
 
   const [first, ...rest] = context.rawRef.split('/');
-  return { branch: first ?? '', sha: first ?? '', path: rest.join('/') };
+  return { branch: first ?? branch, sha: first ?? branch, path: rest.join('/') };
+}
+
+async function defaultBranch(context: RepoContext, token?: string): Promise<string> {
+  const key = `${context.host}/${context.owner}/${context.repo}`;
+  const cached = defaultBranchCache.get(key);
+  if (cached) return cached;
+  const url = repoEndpoint(context.host, context.owner, context.repo);
+  const info = await getJson<{ default_branch: string }>(url, token);
+  defaultBranchCache.set(key, info.default_branch);
+  return info.default_branch;
 }
 
 async function listRefs(context: RepoContext, prefix: string, token?: string): Promise<NamedRef[]> {
