@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Question or help
+    url: https://github.com/decryptable/octonext/discussions/categories/q-a
+    about: Ask usage questions in Discussions — issues are for bugs and feature requests only.
+  - name: Idea or feedback
+    url: https://github.com/decryptable/octonext/discussions/categories/ideas
+    about: Float an idea before it becomes a formal feature request.
+  - name: Support the project
+    url: https://saweria.co/decryptable
+    about: OctoNext is free and local. Optional, voluntary support keeps it that way.

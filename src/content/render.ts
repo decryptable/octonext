@@ -1,11 +1,19 @@
 import type { Adapter } from '../core/adapters/adapter';
 import type { DownloadProgress } from '../core/download';
 import type { IconResolver } from '../core/icons/icon-resolver';
-import type { Bookmark, PullData, RepoContext, RepoTree, TreeNode } from '../core/types';
+import type {
+  Bookmark,
+  PullData,
+  PullSummary,
+  RepoContext,
+  RepoTree,
+  TreeNode,
+} from '../core/types';
 import { message } from '../ui/components/message';
 import { bookmarksPanel } from '../ui/panels/bookmarks-panel';
 import { FilesPanel } from '../ui/panels/files-panel';
 import { prPanel } from '../ui/panels/pr-panel';
+import { prListPanel } from '../ui/panels/pr-list-panel';
 import type { Sidebar } from '../ui/sidebar/sidebar';
 import { navigateTo } from './navigate';
 import { openDiffFile } from './pr-nav';
@@ -47,6 +55,14 @@ export function renderPull(sidebar: Sidebar, pull: PullData, context: RepoContex
       onOpenComment: navigateTo,
     }),
   );
+}
+
+export function renderPullList(
+  sidebar: Sidebar,
+  summaries: PullSummary[],
+  onOpen: (pullNumber: number) => void,
+): void {
+  sidebar.setPanel('pr', prListPanel({ summaries, onOpen }));
 }
 
 export function renderBookmarks(

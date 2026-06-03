@@ -1,11 +1,20 @@
 import type { Settings } from '../../shared/settings';
 import type { Adapter } from './adapter';
-import type { FlatTreeItem, PullData, RepoContext, RepoRef, RepoTree, TreeNode } from '../types';
+import type {
+  FlatTreeItem,
+  PullData,
+  PullSummary,
+  RepoContext,
+  RepoRef,
+  RepoTree,
+  TreeNode,
+} from '../types';
 import { GitHubApiError } from '../types';
 import { getJson } from '../github/client';
 import { treeEndpoint } from '../github/endpoints';
 import { resolveRef } from '../github/refs';
 import { loadPull } from '../github/pulls';
+import { loadPullList } from '../github/pull-list';
 import { buildTree } from '../github/tree-builder';
 import { parseRepoContext } from './repo-context';
 
@@ -39,6 +48,10 @@ export class GitHubAdapter implements Adapter {
   async loadPull(context: RepoContext, settings: Settings): Promise<PullData> {
     if (context.pullNumber == null) throw new GitHubApiError('No pull request in context', 0);
     return loadPull(context, context.pullNumber, settings.accessToken || undefined);
+  }
+
+  async loadPullList(context: RepoContext, settings: Settings): Promise<PullSummary[]> {
+    return loadPullList(context, settings.accessToken || undefined);
   }
 
   nodeUrl(node: TreeNode, ref: RepoRef): string {

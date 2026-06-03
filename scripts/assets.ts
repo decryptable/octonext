@@ -3,6 +3,7 @@ import { createRequire } from 'node:module';
 import { dirname, resolve } from 'node:path';
 import { DIST_DIR, OPTIONS_SRC_DIR, PUBLIC_DIR } from './paths';
 import { renderIcons } from './render-icons';
+import { collectThemeStyles } from './styles';
 
 const MATERIAL_KEYS = [
   'file',
@@ -73,6 +74,13 @@ async function writeCss(src: string, dest: string, minify: boolean): Promise<voi
   await Bun.write(dest, result.success ? result.outputs[0]! : Bun.file(src));
 }
 
+async function writeThemeCss(dest: string, minify: boolean): Promise<void> {
+  await Bun.write(dest, await collectThemeStyles());
+  if (!minify) return;
+  const result = await Bun.build({ entrypoints: [dest], minify: true });
+  if (result.success) await Bun.write(dest, result.outputs[0]!);
+}
+
 export async function copyOptions(minify = false): Promise<void> {
   await mkdir(resolve(DIST_DIR, 'options'), { recursive: true });
   const html = await Bun.file(resolve(OPTIONS_SRC_DIR, 'index.html')).text();
@@ -82,4 +90,5 @@ export async function copyOptions(minify = false): Promise<void> {
     resolve(DIST_DIR, 'options/options.css'),
     minify,
   );
+  await writeThemeCss(resolve(DIST_DIR, 'options/themes.css'), minify);
 }

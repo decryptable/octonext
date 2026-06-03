@@ -1,0 +1,27 @@
+title: "[Q&A] "
+labels: ["question"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Looking for help using OctoNext? Ask here. For confirmed bugs, open a [bug report](https://github.com/decryptable/octonext/issues/new?template=bug_report.yml) instead.
+
+  - type: textarea
+    id: question
+    attributes:
+      label: Your question
+      description: What are you trying to do, and where are you stuck?
+    validations:
+      required: true
+
+  - type: textarea
+    id: tried
+    attributes:
+      label: What you already tried
+      description: Steps, settings, or docs you have already checked.
+
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and OctoNext version
+      placeholder: Chrome 124 · OctoNext 0.1.0

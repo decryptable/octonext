@@ -30,12 +30,22 @@ export function blobEndpoint(host: string, owner: string, name: string, sha: str
   return `${repo(host, owner, name)}/git/blobs/${sha}`;
 }
 
+export function pullsListEndpoint(host: string, owner: string, name: string): string {
+  return `${repo(host, owner, name)}/pulls?state=open&per_page=30&sort=updated&direction=desc`;
+}
+
 export function pullEndpoint(host: string, owner: string, name: string, n: number): string {
   return `${repo(host, owner, name)}/pulls/${n}`;
 }
 
-export function pullFilesEndpoint(host: string, owner: string, name: string, n: number): string {
-  return `${repo(host, owner, name)}/pulls/${n}/files?per_page=100`;
+export function pullFilesEndpoint(
+  host: string,
+  owner: string,
+  name: string,
+  n: number,
+  page = 1,
+): string {
+  return `${repo(host, owner, name)}/pulls/${n}/files?per_page=100&page=${page}`;
 }
 
 export function pullCommentsEndpoint(host: string, owner: string, name: string, n: number): string {

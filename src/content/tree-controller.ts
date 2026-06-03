@@ -1,12 +1,13 @@
 import type { GitHubAdapter } from '../core/adapters/github-adapter';
 import { downloadNodes } from '../core/download';
 import type { IconResolver } from '../core/icons/icon-resolver';
-import type { RepoContext, RepoTree } from '../core/types';
+import type { PullSummary, RepoContext, RepoTree } from '../core/types';
 import type { Settings } from '../shared/settings';
 import { spinner } from '../ui/components/spinner';
 import type { Sidebar } from '../ui/sidebar/sidebar';
 import { buildErrorView } from './error-view';
-import { renderFiles, renderPull } from './render';
+import { navigateTo } from './navigate';
+import { renderFiles, renderPull, renderPullList } from './render';
 
 export interface TreeControllerDeps {
   sidebar: Sidebar;
@@ -19,11 +20,14 @@ export interface TreeControllerDeps {
 export class TreeController {
   private tree: RepoTree | null = null;
   private treeIsDefault = false;
+  private pullList: PullSummary[] | null = null;
+  private pullListRepo = '';
 
   constructor(private readonly deps: TreeControllerDeps) {}
 
   reset(): void {
     this.tree = null;
+    this.pullList = null;
   }
 
   rerenderFiles(): void {
@@ -33,6 +37,26 @@ export class TreeController {
   async show(context: RepoContext): Promise<void> {
     await this.loadTree(context);
     if (context.view === 'pull') await this.loadPull(context);
+    else await this.loadPullListPanel(context);
+  }
+
+  private async loadPullListPanel(context: RepoContext): Promise<void> {
+    const key = `${context.host}/${context.owner}/${context.repo}`;
+    const open = (pullNumber: number) =>
+      navigateTo(`https://${context.host}/${context.owner}/${context.repo}/pull/${pullNumber}`);
+    if (this.pullListRepo === key && this.pullList) {
+      renderPullList(this.deps.sidebar, this.pullList, open);
+      return;
+    }
+    this.deps.sidebar.setPanel('pr', spinner());
+    try {
+      const list = await this.deps.adapter.loadPullList(context, this.deps.settings());
+      this.pullList = list;
+      this.pullListRepo = key;
+      renderPullList(this.deps.sidebar, list, open);
+    } catch (error) {
+      this.showError('pr', error);
+    }
   }
 
   private async loadTree(context: RepoContext): Promise<void> {

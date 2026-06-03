@@ -4,6 +4,7 @@ import { FONTS } from '../shared/fonts';
 import type { Settings } from '../shared/settings';
 import { loadSettings, saveSettings } from '../shared/storage';
 import { THEMES } from '../shared/theme';
+import { Preview } from './preview';
 import { type SelectItem, searchableSelect } from './select';
 
 type SelectKey = 'theme' | 'font' | 'iconPack' | 'dock';
@@ -70,25 +71,31 @@ function bindToken(settings: Settings): void {
   token.addEventListener('change', () => void applyToken(token.value.trim()));
 }
 
-function bindFontSize(settings: Settings): void {
+function bindFontSize(settings: Settings, preview: Preview): void {
   const range = byId<HTMLInputElement>('fontSize');
   const output = byId<HTMLOutputElement>('fontSizeValue');
   range.min = String(FONT_SIZE.min);
   range.max = String(FONT_SIZE.max);
   range.value = String(settings.fontSize);
   output.textContent = `${settings.fontSize}px`;
-  range.addEventListener('input', () => (output.textContent = `${range.value}px`));
+  range.addEventListener('input', () => {
+    output.textContent = `${range.value}px`;
+    preview.setFontSize(Number(range.value));
+  });
   range.addEventListener('change', () => void commit({ fontSize: Number(range.value) }));
 }
 
-function bindSelects(settings: Settings): void {
+function bindSelects(settings: Settings, preview: Preview): void {
   for (const key of Object.keys(SELECT_ITEMS) as SelectKey[]) {
     const mount = byId<HTMLElement>(key);
     mount.appendChild(
       searchableSelect({
         items: SELECT_ITEMS[key],
         value: String(settings[key]),
-        onChange: (id) => void commit({ [key]: id }),
+        onChange: (id) => {
+          preview.select(key, id);
+          void commit({ [key]: id });
+        },
       }),
     );
   }
@@ -104,9 +111,13 @@ function bindToggles(settings: Settings): void {
 
 async function main(): Promise<void> {
   const settings = await loadSettings();
+  const preview = new Preview(byId<HTMLElement>('preview'));
+  preview.setTheme(settings.theme);
+  preview.setFont(settings.font);
+  preview.setFontSize(settings.fontSize);
   bindToken(settings);
-  bindSelects(settings);
-  bindFontSize(settings);
+  bindSelects(settings, preview);
+  bindFontSize(settings, preview);
   bindToggles(settings);
 }
 

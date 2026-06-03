@@ -1,0 +1,110 @@
+.octonext-pr__labels,
+.octonext-pr__reviewers {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.octonext-pr__label {
+  padding: 1px 8px;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+  font-size: 11px;
+  font-weight: 600;
+  background: color-mix(in srgb, currentColor 12%, transparent);
+}
+
+.octonext-pr__reviewers-label {
+  font-size: 11px;
+  color: var(--octonext-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.octonext-pr__chip {
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: var(--octonext-bg);
+  border: 1px solid var(--octonext-border);
+  font-size: 11px;
+}
+
+.octonext-pr__section {
+  margin-top: 6px;
+}
+
+.octonext-pr__toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px 6px;
+}
+
+.octonext-pr__heading {
+  flex: none;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--octonext-muted);
+}
+
+.octonext-pr__toolbar .octonext-search {
+  flex: 1;
+}
+
+.octonext-pr__file {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px;
+  cursor: pointer;
+}
+
+.octonext-pr__file:hover {
+  background: var(--octonext-hover);
+}
+
+.octonext-pr__file-status {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--octonext-muted);
+}
+
+.octonext-pr__file-status[data-status='added'] {
+  background: var(--octonext-add);
+}
+
+.octonext-pr__file-status[data-status='removed'] {
+  background: var(--octonext-del);
+}
+
+.octonext-pr__file-status[data-status='modified'] {
+  background: #d29922;
+}
+
+.octonext-pr__file-status[data-status='renamed'] {
+  background: #58a6ff;
+}
+
+.octonext-pr__file-name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.octonext-pr__stat {
+  font-variant-numeric: tabular-nums;
+  font-size: 11px;
+}
+
+.octonext-pr__stat--add {
+  color: var(--octonext-add);
+}
+
+.octonext-pr__stat--del {
+  color: var(--octonext-del);
+}

@@ -1,20 +1,8 @@
-import type { PullComment, PullData, PullFile, RepoContext } from '../types';
+import type { PullData, RepoContext } from '../types';
 import { getJson } from './client';
-import { pullCommentsEndpoint, pullEndpoint, pullFilesEndpoint } from './endpoints';
-
-interface FileResponse {
-  filename: string;
-  status: string;
-  additions: number;
-  deletions: number;
-}
-
-interface CommentResponse {
-  path?: string;
-  body: string;
-  html_url: string;
-  user: { login: string } | null;
-}
+import { pullEndpoint } from './endpoints';
+import { fetchPullComments, fetchPullFiles } from './pull-files';
+import { type PullInfo, toPullData } from './pull-map';
 
 export async function loadPull(
   context: RepoContext,
@@ -22,35 +10,12 @@ export async function loadPull(
   token?: string,
 ): Promise<PullData> {
   const { host, owner, repo } = context;
-  const [info, files, comments] = await Promise.all([
-    getJson<{ title: string }>(pullEndpoint(host, owner, repo, pullNumber), token),
-    getJson<FileResponse[]>(pullFilesEndpoint(host, owner, repo, pullNumber), token),
-    getJson<CommentResponse[]>(pullCommentsEndpoint(host, owner, repo, pullNumber), token),
+  const info = await getJson<PullInfo>(pullEndpoint(host, owner, repo, pullNumber), token);
+  const [files, comments] = await Promise.all([
+    fetchPullFiles(context, pullNumber, info.changed_files, token),
+    fetchPullComments(context, pullNumber, token),
   ]);
-  return {
-    number: pullNumber,
-    title: info.title,
-    files: files.map(toFile),
-    comments: comments.map(toComment),
-  };
-}
-
-function toFile(file: FileResponse): PullFile {
-  return {
-    path: file.filename,
-    status: file.status,
-    additions: file.additions,
-    deletions: file.deletions,
-  };
-}
-
-function toComment(comment: CommentResponse): PullComment {
-  return {
-    path: comment.path ?? null,
-    body: comment.body,
-    author: comment.user?.login ?? 'unknown',
-    url: comment.html_url,
-  };
+  return toPullData(pullNumber, info, files, comments);
 }
 
 export async function diffAnchor(path: string): Promise<string> {

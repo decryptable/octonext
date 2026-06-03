@@ -46,6 +46,8 @@ export interface RepoTree {
   truncated: boolean;
 }
 
+export type PullState = 'open' | 'merged' | 'closed' | 'draft';
+
 export interface PullFile {
   path: string;
   status: string;
@@ -60,9 +62,34 @@ export interface PullComment {
   url: string;
 }
 
+export interface PullLabel {
+  name: string;
+  color: string;
+}
+
+export interface PullSummary {
+  number: number;
+  title: string;
+  author: string;
+  state: PullState;
+  headRef: string;
+  labels: PullLabel[];
+}
+
 export interface PullData {
   number: number;
   title: string;
+  state: PullState;
+  author: string;
+  baseRef: string;
+  headRef: string;
+  additions: number;
+  deletions: number;
+  changedFiles: number;
+  commits: number;
+  reviewComments: number;
+  labels: PullLabel[];
+  reviewers: string[];
   files: PullFile[];
   comments: PullComment[];
 }

@@ -1,0 +1,78 @@
+name: Bug report
+description: Something in OctoNext behaves incorrectly.
+title: "bug: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to file a report. Please fill in the details below so the issue can be reproduced quickly.
+
+  - type: checkboxes
+    id: preflight
+    attributes:
+      label: Pre-flight checks
+      options:
+        - label: I searched existing issues and this has not been reported.
+          required: true
+        - label: I am running the latest build from `main` or the latest release.
+          required: true
+        - label: I disabled other GitHub extensions to confirm OctoNext is the cause.
+          required: false
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: A clear description of the bug and what you expected instead.
+      placeholder: The file tree fails to render on private repositories…
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Numbered steps that reliably trigger the bug.
+      placeholder: |
+        1. Open a repository at github.com/owner/repo
+        2. Click the OctoNext toggle
+        3. Observe …
+    validations:
+      required: true
+
+  - type: input
+    id: repo-url
+    attributes:
+      label: Affected page (if public)
+      description: A public URL where the bug reproduces, if any.
+      placeholder: https://github.com/owner/repo
+
+  - type: dropdown
+    id: browser
+    attributes:
+      label: Browser
+      options:
+        - Chrome
+        - Edge
+        - Brave
+        - Firefox
+        - Other (note in description)
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: OctoNext version
+      description: Found on the options page or in `manifest.json`.
+      placeholder: 0.1.0
+    validations:
+      required: true
+
+  - type: textarea
+    id: console
+    attributes:
+      label: Console output
+      description: Relevant errors from DevTools (F12 → Console). Automatically formatted as code.
+      render: shell

@@ -1,0 +1,52 @@
+name: Feature request
+description: Suggest a capability or improvement for OctoNext.
+title: "feat: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Have a rough idea instead of a concrete proposal? Start a thread in [Discussions → Ideas](https://github.com/decryptable/octonext/discussions/categories/ideas).
+
+  - type: checkboxes
+    id: preflight
+    attributes:
+      label: Pre-flight checks
+      options:
+        - label: I searched existing issues and discussions for the same request.
+          required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What are you trying to do that OctoNext makes hard or impossible today?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Describe the behavior you would like. UI sketches welcome.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Other approaches, workarounds, or existing tools you tried.
+
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Scope
+      description: Roughly how large does this feel?
+      options:
+        - Small tweak
+        - New option or panel
+        - Larger subsystem
+        - Not sure
+    validations:
+      required: true
