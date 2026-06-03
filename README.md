@@ -1,5 +1,7 @@
 # OctoNext
 
+![CI](https://github.com/decryptable/octonext/actions/workflows/ci.yml/badge.svg)
+
 A fast, clean **code tree sidebar for GitHub**, built as a Manifest V3 browser
 extension with TypeScript and [Bun](https://bun.sh). OctoNext renders a
 collapsible file tree for any repository so you can browse code without constant
@@ -11,7 +13,8 @@ page loads. Everything runs locally — there is **no backend and no telemetry**
   REST API with lazy folder loading for large repositories
 - **VS Code file icons** via the Material Icon Theme, plus a minimal icon pack
 - **Themes** — Auto, GitHub Light/Dark/Dimmed, One Dark, Dracula, Nord, Monokai,
-  Solarized, Gruvbox, Tokyo Night
+  Solarized, Gruvbox, Tokyo Night, plus animated themes (Pixel, Cute, Retro CRT,
+  Hacker, Synthwave) with motion on folder open/close, clicks, and ripples
 - **Fonts** — pick from bundled coding fonts (JetBrains Mono, Fira Code, …) or
   system fonts
 - **Search** files by name with instant filtering

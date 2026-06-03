@@ -14,13 +14,17 @@ extension into `dist/`:
 | `content.js`    | `src/content/index.ts`    | IIFE   | Injected on GitHub pages    |
 | `background.js` | `src/background/index.ts` | IIFE   | Service worker / event page |
 | `options/*`     | `src/options/*`           | ESM    | Settings page               |
-| `content.css`   | `src/styles/*.css`        | —      | Concatenated sidebar styles |
+| `content.css`   | `src/styles/` + `themes/` | —      | Concatenated sidebar styles |
 | `manifest.json` | `src/manifest.config.ts`  | —      | Generated per target        |
 
-Assets are copied by `scripts/assets.ts`: Material icon SVGs + a trimmed
-`manifest.json` lookup, the bundled fonts, and PNG action icons rendered from
-`public/icon.svg` via `scripts/render-icons.ts` (resvg-wasm).
-`scripts/package.ts` zips Chrome and Firefox builds into `release/`.
+Styles are concatenated by `scripts/styles.ts`: a fixed core order followed by
+every file in `src/styles/themes/` (one file per theme, scoped by
+`[data-octonext-theme]`). Assets are copied by `scripts/assets.ts`: Material icon
+SVGs + a trimmed `manifest.json` lookup, the bundled fonts, and PNG action icons
+rendered from `public/icon.svg` via `scripts/render-icons.ts` (resvg-wasm).
+`scripts/package.ts` zips Chrome and Firefox builds into `release/` and signs a
+CRX3 with the key from `keys/` or the `CRX_PRIVATE_KEY` environment variable. CI
+runs in `.github/workflows/` (verify on push/PR, package on `v*` tags).
 
 ## Source map
 
@@ -62,4 +66,3 @@ src/
 Implement the `Adapter` interface in `src/core/adapters/`. An adapter maps a URL
 to a `RepoContext`, loads a `RepoTree` and `PullData`, and builds navigation
 URLs for nodes. The rest of the UI is host-agnostic.
-```
