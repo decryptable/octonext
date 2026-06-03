@@ -31,6 +31,32 @@
   font-variant-numeric: tabular-nums;
 }
 
+.octonext-dl__clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  border: 1px solid var(--octonext-border);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--octonext-muted);
+  cursor: pointer;
+}
+
+.octonext-dl__clear:hover {
+  background: var(--octonext-hover);
+  color: var(--octonext-fg);
+}
+
+.octonext-dl__clear[hidden] {
+  display: none;
+}
+
+.octonext-dl__clear svg {
+  width: 13px;
+  height: 13px;
+}
+
 .octonext-dl__button {
   padding: 6px 14px;
   border: none;

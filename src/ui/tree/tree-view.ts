@@ -3,6 +3,7 @@ import type { TreeNode } from '../../core/types';
 import { TreeSelection } from '../../core/selection';
 import { CSS_PREFIX } from '../../shared/constants';
 import { h } from '../dom';
+import { ancestorsOf } from './tree-paths';
 import { type NodeRow, createRow } from './tree-node';
 
 export interface TreeViewOptions {
@@ -34,8 +35,17 @@ export class TreeView {
     this.highlightCurrent();
   }
 
+  clearSelection(): void {
+    this.selection.clear();
+    this.refreshSelection();
+  }
+
   private select(node: TreeNode, on: boolean): void {
     this.selection.toggle(node, on);
+    this.refreshSelection();
+  }
+
+  private refreshSelection(): void {
     for (const entry of this.entries.values())
       entry.row.setSelected(this.selection.stateOf(entry.node));
     this.options.onSelectionChange(this.selection.selectedBlobs(this.options.root));
@@ -113,17 +123,4 @@ export class TreeView {
     entry.row.setActive(true);
     entry.row.el.scrollIntoView({ block: 'center' });
   }
-}
-
-function ancestorsOf(path: string): string[] {
-  if (!path) return [];
-  const parts = path.split('/');
-  parts.pop();
-  const result: string[] = [];
-  parts.reduce((prefix, part) => {
-    const next = prefix ? `${prefix}/${part}` : part;
-    result.push(next);
-    return next;
-  }, '');
-  return result;
 }

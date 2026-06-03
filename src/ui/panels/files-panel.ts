@@ -34,6 +34,7 @@ export class FilesPanel {
     this.bar = downloadBar({
       onDownload: () => void this.download(),
       onCancel: () => this.cancel(),
+      onClear: () => this.view.clearSelection(),
     });
     this.view = this.createView();
     this.body = h('div', { class: `${CSS_PREFIX}-files__body` }, this.view.el);
