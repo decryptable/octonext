@@ -3,6 +3,7 @@ import type { TreeNode } from '../../core/types';
 import { formatSize } from '../../core/format';
 import { CSS_PREFIX } from '../../shared/constants';
 import { h, svg } from '../dom';
+import { pulse } from '../effects';
 import { ICONS } from '../icons';
 import { renderNodeIcon } from './node-icon';
 
@@ -66,7 +67,10 @@ export function createRow(
     el: row,
     setExpanded: (expanded) => {
       row.classList.toggle(`${CSS_PREFIX}-node--expanded`, expanded);
-      if (isDir) renderNodeIcon(iconBox, resolver, node, expanded);
+      if (isDir) {
+        renderNodeIcon(iconBox, resolver, node, expanded);
+        pulse(row, `${CSS_PREFIX}-node--pulse`);
+      }
     },
     setActive: (active) => row.classList.toggle(`${CSS_PREFIX}-node--active`, active),
     setSelected: (state) => {

@@ -1,5 +1,6 @@
 import { CSS_PREFIX } from '../../shared/constants';
 import { h, svg } from '../dom';
+import { ripple } from '../effects';
 import { type IconName, ICONS } from '../icons';
 
 export interface IconButton {
@@ -15,7 +16,12 @@ export function iconButton(icon: IconName, label: string, onClick: () => void): 
       type: 'button',
       title: label,
       attrs: { 'aria-label': label },
-      on: { click: onClick },
+      on: {
+        click: (event) => {
+          ripple(el, event as MouseEvent);
+          onClick();
+        },
+      },
     },
     svg(ICONS[icon]),
   );

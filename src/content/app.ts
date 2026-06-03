@@ -14,6 +14,7 @@ import { Sidebar } from '../ui/sidebar/sidebar';
 import { applyAppearance } from './appearance';
 import { BookmarkController } from './bookmark-controller';
 import { buildErrorView } from './error-view';
+import { attachRippleDelegation } from './interactions';
 import { renderFiles, renderPull } from './render';
 
 export class OctoNextApp {
@@ -45,6 +46,7 @@ export class OctoNextApp {
     injectFontFaces();
     this.resolver = await IconResolver.create(this.settings.iconPack);
     document.documentElement.appendChild(this.sidebar.root);
+    attachRippleDelegation(this.sidebar.root);
     applyAppearance(this.sidebar, this.settings);
     await this.bookmarks.init();
     watchSettings((settings) => void this.onSettingsChange(settings));
