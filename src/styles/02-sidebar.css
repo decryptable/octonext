@@ -35,6 +35,7 @@ html.octonext-dock-right.octonext-open .octonext-sidebar {
 .octonext-header {
   display: flex;
   align-items: center;
+  flex-wrap: nowrap;
   gap: 6px;
   padding: 8px 10px;
   border-bottom: 1px solid var(--octonext-border);
@@ -48,8 +49,8 @@ html.octonext-dock-right.octonext-open .octonext-sidebar {
 .octonext-header__titles {
   display: flex;
   flex-direction: column;
+  flex: 1;
   min-width: 0;
-  margin-right: auto;
 }
 
 .octonext-header__repo {
@@ -59,12 +60,32 @@ html.octonext-dock-right.octonext-open .octonext-sidebar {
   text-overflow: ellipsis;
 }
 
-.octonext-header__branch {
-  color: var(--octonext-muted);
-  font-size: 11px;
+.octonext-header__meta {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  min-width: 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.octonext-header__branch {
+  color: var(--octonext-muted);
+  font-size: 11px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.octonext-header__actions {
+  display: flex;
+  align-items: center;
+  flex: none;
+  gap: 1px;
+}
+
+html.octonext-pinned .octonext-header__close {
+  display: none;
 }
 
 .octonext-sidebar__body {

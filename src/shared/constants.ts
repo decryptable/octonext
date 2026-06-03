@@ -32,7 +32,7 @@ export const GITHUB_HOST = 'github.com';
 export const GITHUB_API_ORIGIN = 'https://api.github.com';
 
 export const SIDEBAR_WIDTH = {
-  min: 220,
+  min: 248,
   max: 920,
   default: 320,
 } as const;

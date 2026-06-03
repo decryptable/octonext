@@ -1,11 +1,5 @@
-.octonext-header__meta {
-  display: flex;
-  align-items: baseline;
-  gap: 5px;
-  min-width: 0;
-}
-
 .octonext-header__size {
+  flex: none;
   color: var(--octonext-muted);
   font-size: 11px;
   white-space: nowrap;

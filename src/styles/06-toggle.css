@@ -53,6 +53,7 @@ html.octonext-pinned .octonext-toggle {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  flex: none;
   padding: 4px;
   border: none;
   border-radius: 6px;

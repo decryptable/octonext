@@ -25,6 +25,9 @@ export function createHeader(callbacks: HeaderCallbacks): SidebarHeader {
   const size = h('span', { class: `${CSS_PREFIX}-header__size` });
   const star = iconButton('star', 'Bookmark repository', callbacks.onBookmark);
 
+  const close = iconButton('close', 'Hide sidebar', callbacks.onClose);
+  close.el.classList.add(`${CSS_PREFIX}-header__close`);
+
   const el = h(
     'header',
     { class: `${CSS_PREFIX}-header` },
@@ -35,11 +38,15 @@ export function createHeader(callbacks: HeaderCallbacks): SidebarHeader {
       title,
       h('span', { class: `${CSS_PREFIX}-header__meta` }, branch, size),
     ),
-    star.el,
-    iconButton('dock', 'Switch side', callbacks.onDock).el,
-    iconButton('refresh', 'Reload tree', callbacks.onRefresh).el,
-    iconButton('settings', 'Settings', callbacks.onSettings).el,
-    iconButton('close', 'Hide sidebar', callbacks.onClose).el,
+    h(
+      'div',
+      { class: `${CSS_PREFIX}-header__actions` },
+      star.el,
+      iconButton('dock', 'Switch side', callbacks.onDock).el,
+      iconButton('refresh', 'Reload tree', callbacks.onRefresh).el,
+      iconButton('settings', 'Settings', callbacks.onSettings).el,
+      close.el,
+    ),
   );
 
   return {
