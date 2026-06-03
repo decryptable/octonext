@@ -26,8 +26,11 @@
   }
 }
 
-#octonext-root {
+html {
   --octonext-sidebar-width: 320px;
+}
+
+#octonext-root {
   position: fixed;
   inset: 0 auto 0 0;
   z-index: 2147483000;
