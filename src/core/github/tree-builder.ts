@@ -37,7 +37,16 @@ export function buildTree(items: FlatTreeItem[], collapse: boolean): TreeNode {
   }
   sort(root);
   if (collapse) collapseChains(root);
+  computeSizes(root);
   return root;
+}
+
+function computeSizes(node: TreeNode): number {
+  if (node.type === 'blob') return node.size ?? 0;
+  let total = 0;
+  for (const child of node.children) total += computeSizes(child);
+  node.size = total;
+  return total;
 }
 
 function sort(node: TreeNode): void {

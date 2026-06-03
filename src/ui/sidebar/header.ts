@@ -1,4 +1,5 @@
 import type { RepoRef } from '../../core/types';
+import { formatSize } from '../../core/format';
 import { CSS_PREFIX } from '../../shared/constants';
 import { type IconButton, iconButton } from '../components/icon-button';
 import { h, svg } from '../dom';
@@ -14,20 +15,26 @@ export interface HeaderCallbacks {
 
 export interface SidebarHeader {
   el: HTMLElement;
-  setRepo: (ref: RepoRef) => void;
+  setRepo: (ref: RepoRef, totalSize: number) => void;
   setBookmarked: (active: boolean) => void;
 }
 
 export function createHeader(callbacks: HeaderCallbacks): SidebarHeader {
   const title = h('span', { class: `${CSS_PREFIX}-header__repo`, text: '—' });
   const branch = h('span', { class: `${CSS_PREFIX}-header__branch` });
+  const size = h('span', { class: `${CSS_PREFIX}-header__size` });
   const star = iconButton('star', 'Bookmark repository', callbacks.onBookmark);
 
   const el = h(
     'header',
     { class: `${CSS_PREFIX}-header` },
     svg(ICONS.logo, `${CSS_PREFIX}-header__logo`),
-    h('div', { class: `${CSS_PREFIX}-header__titles` }, title, branch),
+    h(
+      'div',
+      { class: `${CSS_PREFIX}-header__titles` },
+      title,
+      h('span', { class: `${CSS_PREFIX}-header__meta` }, branch, size),
+    ),
     star.el,
     iconButton('dock', 'Switch side', callbacks.onDock).el,
     iconButton('refresh', 'Reload tree', callbacks.onRefresh).el,
@@ -37,10 +44,12 @@ export function createHeader(callbacks: HeaderCallbacks): SidebarHeader {
 
   return {
     el,
-    setRepo: (ref) => {
+    setRepo: (ref, totalSize) => {
       title.textContent = `${ref.owner}/${ref.repo}`;
       title.title = `${ref.owner}/${ref.repo}`;
       branch.textContent = ref.branch;
+      size.textContent = totalSize ? `· ${formatSize(totalSize)}` : '';
+      size.title = 'Total repository size';
     },
     setBookmarked: (active) => bookmarkState(star, active),
   };
