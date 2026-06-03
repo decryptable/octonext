@@ -1,6 +1,7 @@
 import type { Adapter } from '../core/adapters/adapter';
+import type { DownloadProgress } from '../core/download';
 import type { IconResolver } from '../core/icons/icon-resolver';
-import type { Bookmark, PullData, RepoContext, RepoTree } from '../core/types';
+import type { Bookmark, PullData, RepoContext, RepoTree, TreeNode } from '../core/types';
 import { message } from '../ui/components/message';
 import { bookmarksPanel } from '../ui/panels/bookmarks-panel';
 import { FilesPanel } from '../ui/panels/files-panel';
@@ -9,11 +10,18 @@ import type { Sidebar } from '../ui/sidebar/sidebar';
 import { navigateTo } from './navigate';
 import { openDiffFile } from './pr-nav';
 
+export type DownloadHandler = (
+  blobs: TreeNode[],
+  ref: RepoTree['ref'],
+  onProgress: (p: DownloadProgress) => void,
+) => Promise<void>;
+
 export function renderFiles(
   sidebar: Sidebar,
   tree: RepoTree,
   resolver: IconResolver,
   adapter: Adapter,
+  onDownload: DownloadHandler,
 ): void {
   if (tree.root.children.length === 0) {
     sidebar.setPanel('files', message('info', 'This repository is empty.'));
@@ -24,6 +32,7 @@ export function renderFiles(
     resolver,
     resolveUrl: (node) => adapter.nodeUrl(node, tree.ref),
     onNavigate: navigateTo,
+    onDownload: (blobs, onProgress) => onDownload(blobs, tree.ref, onProgress),
   });
   sidebar.setPanel('files', panel.el);
 }

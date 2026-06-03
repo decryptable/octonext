@@ -26,6 +26,10 @@ export function matchingRefsEndpoint(
   return `${repo(host, owner, name)}/git/matching-refs/${kind}/${encodeURIComponent(prefix)}`;
 }
 
+export function blobEndpoint(host: string, owner: string, name: string, sha: string): string {
+  return `${repo(host, owner, name)}/git/blobs/${sha}`;
+}
+
 export function pullEndpoint(host: string, owner: string, name: string, n: number): string {
   return `${repo(host, owner, name)}/pulls/${n}`;
 }

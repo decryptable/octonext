@@ -1,5 +1,6 @@
 import type { IconResolver } from '../../core/icons/icon-resolver';
 import type { TreeNode } from '../../core/types';
+import { TreeSelection } from '../../core/selection';
 import { CSS_PREFIX } from '../../shared/constants';
 import { h } from '../dom';
 import { type NodeRow, createRow } from './tree-node';
@@ -10,6 +11,7 @@ export interface TreeViewOptions {
   resolver: IconResolver;
   resolveUrl: (node: TreeNode) => string;
   onNavigate: (url: string) => void;
+  onSelectionChange: (blobs: TreeNode[]) => void;
 }
 
 interface Entry {
@@ -23,12 +25,20 @@ export class TreeView {
   readonly el: HTMLElement;
   private readonly entries = new Map<string, Entry>();
   private readonly expanded = new Set<string>();
+  private readonly selection = new TreeSelection();
 
   constructor(private readonly options: TreeViewOptions) {
     this.el = h('div', { class: `${CSS_PREFIX}-tree`, attrs: { role: 'tree' } });
     for (const dir of ancestorsOf(options.currentPath)) this.expanded.add(dir);
     this.renderLevel(this.el, options.root.children, 0);
     this.highlightCurrent();
+  }
+
+  private select(node: TreeNode, on: boolean): void {
+    this.selection.toggle(node, on);
+    for (const entry of this.entries.values())
+      entry.row.setSelected(this.selection.stateOf(entry.node));
+    this.options.onSelectionChange(this.selection.selectedBlobs(this.options.root));
   }
 
   expandAll(): void {
@@ -59,9 +69,11 @@ export class TreeView {
     const row = createRow(node, depth, this.options.resolver, {
       onActivate: (n) => this.options.onNavigate(this.options.resolveUrl(n)),
       onToggle: () => this.toggle(node),
+      onSelect: (n, on) => this.select(n, on),
     });
     const entry: Entry = { node, row, wrap, depth };
     this.entries.set(node.path, entry);
+    row.setSelected(this.selection.stateOf(node));
     container.appendChild(row.el);
     if (wrap) {
       wrap.hidden = true;
