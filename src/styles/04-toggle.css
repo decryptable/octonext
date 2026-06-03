@@ -1,0 +1,32 @@
+.octonext-toggle {
+  position: absolute;
+  top: 62px;
+  left: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid var(--octonext-border);
+  border-left: none;
+  border-radius: 0 8px 8px 0;
+  background: var(--octonext-bg);
+  color: var(--octonext-accent);
+  box-shadow: 0 2px 8px var(--octonext-shadow);
+  cursor: pointer;
+  pointer-events: auto;
+  transition: transform 0.18s ease;
+}
+
+.octonext-toggle:hover {
+  width: 36px;
+}
+
+html.octonext-open .octonext-toggle {
+  transform: translateX(var(--octonext-sidebar-width));
+}
+
+html.octonext-pinned .octonext-toggle {
+  display: none;
+}

@@ -1,0 +1,45 @@
+#octonext-root {
+  --octonext-bg: #ffffff;
+  --octonext-fg: #1f2328;
+  --octonext-muted: #59636e;
+  --octonext-border: #d1d9e0;
+  --octonext-hover: #f3f4f6;
+  --octonext-active: #ddf4ff;
+  --octonext-accent: #2da44e;
+  --octonext-shadow: rgba(31, 35, 40, 0.12);
+}
+
+@media (prefers-color-scheme: dark) {
+  #octonext-root {
+    --octonext-bg: #0d1117;
+    --octonext-fg: #e6edf3;
+    --octonext-muted: #9198a1;
+    --octonext-border: #30363d;
+    --octonext-hover: #161b22;
+    --octonext-active: #163356;
+    --octonext-accent: #3fb950;
+    --octonext-shadow: rgba(1, 4, 9, 0.5);
+  }
+}
+
+#octonext-root {
+  --octonext-sidebar-width: 320px;
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: 2147483000;
+  font: 13px/1.5 -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  pointer-events: none;
+}
+
+#octonext-root * {
+  box-sizing: border-box;
+}
+
+html.octonext-pinned body {
+  margin-left: var(--octonext-sidebar-width);
+}
+
+body.octonext-resizing {
+  cursor: col-resize;
+  user-select: none;
+}

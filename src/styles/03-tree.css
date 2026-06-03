@@ -1,0 +1,66 @@
+.octonext-tree {
+  display: flex;
+  flex-direction: column;
+}
+
+.octonext-node {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 26px;
+  padding-right: 10px;
+  cursor: pointer;
+  white-space: nowrap;
+  color: var(--octonext-fg);
+}
+
+.octonext-node:hover {
+  background: var(--octonext-hover);
+}
+
+.octonext-node:focus-visible {
+  outline: 2px solid var(--octonext-accent);
+  outline-offset: -2px;
+}
+
+.octonext-node--active {
+  background: var(--octonext-active);
+  font-weight: 600;
+}
+
+.octonext-node__chevron {
+  flex: none;
+  color: var(--octonext-muted);
+  transition: transform 0.12s ease;
+}
+
+.octonext-node--expanded > .octonext-node__chevron {
+  transform: rotate(90deg);
+}
+
+.octonext-node__chevron--spacer {
+  display: inline-block;
+  width: 16px;
+  flex: none;
+}
+
+.octonext-node__icon {
+  flex: none;
+}
+
+.octonext-node__icon--folder {
+  color: #54aeff;
+}
+
+.octonext-node__icon--file {
+  color: var(--octonext-muted);
+}
+
+.octonext-node__label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.octonext-node__children[hidden] {
+  display: none;
+}

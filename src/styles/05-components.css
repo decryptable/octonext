@@ -1,0 +1,49 @@
+.octonext-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 40px 16px;
+  color: var(--octonext-muted);
+}
+
+.octonext-spinner__ring {
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--octonext-border);
+  border-top-color: var(--octonext-accent);
+  border-radius: 50%;
+  animation: octonext-spin 0.7s linear infinite;
+}
+
+@keyframes octonext-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.octonext-message {
+  margin: 16px 12px;
+  padding: 14px;
+  border: 1px solid var(--octonext-border);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.octonext-message--error {
+  border-color: #d1242f55;
+}
+
+.octonext-message__text {
+  margin: 0 0 10px;
+  color: var(--octonext-fg);
+}
+
+.octonext-message__action {
+  padding: 6px 12px;
+  border: 1px solid var(--octonext-border);
+  border-radius: 6px;
+  background: var(--octonext-accent);
+  color: #ffffff;
+  cursor: pointer;
+}

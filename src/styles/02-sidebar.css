@@ -1,0 +1,90 @@
+.octonext-sidebar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: var(--octonext-sidebar-width);
+  display: flex;
+  flex-direction: column;
+  background: var(--octonext-bg);
+  color: var(--octonext-fg);
+  border-right: 1px solid var(--octonext-border);
+  box-shadow: 0 0 24px var(--octonext-shadow);
+  transform: translateX(-100%);
+  transition: transform 0.18s ease;
+  pointer-events: auto;
+}
+
+html.octonext-open .octonext-sidebar {
+  transform: translateX(0);
+}
+
+.octonext-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--octonext-border);
+}
+
+.octonext-header__logo {
+  color: var(--octonext-accent);
+  flex: none;
+}
+
+.octonext-header__titles {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  margin-right: auto;
+}
+
+.octonext-header__repo {
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.octonext-header__branch {
+  color: var(--octonext-muted);
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.octonext-header__action {
+  display: inline-flex;
+  padding: 4px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--octonext-muted);
+  cursor: pointer;
+}
+
+.octonext-header__action:hover {
+  background: var(--octonext-hover);
+  color: var(--octonext-fg);
+}
+
+.octonext-sidebar__body {
+  flex: 1;
+  overflow: auto;
+  padding: 6px 0;
+}
+
+.octonext-resizer {
+  position: absolute;
+  top: 0;
+  right: -3px;
+  width: 6px;
+  height: 100%;
+  cursor: col-resize;
+}
+
+.octonext-resizer:hover {
+  background: var(--octonext-accent);
+  opacity: 0.4;
+}
