@@ -9,7 +9,6 @@ export interface SidebarCallbacks {
   onRefresh: () => void;
   onSettings: () => void;
   onWidthCommit: (width: number) => void;
-  onOpenChange: (open: boolean) => void;
 }
 
 export class Sidebar {
@@ -22,7 +21,7 @@ export class Sidebar {
   private open = false;
   private pinned = false;
 
-  constructor(private readonly callbacks: SidebarCallbacks) {
+  constructor(callbacks: SidebarCallbacks) {
     this.header = createHeader({
       onRefresh: callbacks.onRefresh,
       onSettings: callbacks.onSettings,
@@ -65,7 +64,6 @@ export class Sidebar {
     this.open = open;
     document.documentElement.classList.toggle(`${CSS_PREFIX}-open`, open);
     this.toggle.setOpen(open);
-    this.callbacks.onOpenChange(open);
   }
 
   isOpen(): boolean {

@@ -43,3 +43,7 @@ body.octonext-resizing {
   cursor: col-resize;
   user-select: none;
 }
+
+html.octonext-repo-only:not(.octonext-has-repo) #octonext-root {
+  display: none;
+}

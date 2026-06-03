@@ -23,7 +23,6 @@ export class OctoNextApp {
       onRefresh: () => this.loadTree(true),
       onSettings: () => void sendMessage({ type: 'open-options' }),
       onWidthCommit: (sidebarWidth) => this.persist({ sidebarWidth }),
-      onOpenChange: (pinned) => this.settings.pinned !== pinned && this.persist({ pinned }),
     });
   }
 
@@ -42,6 +41,7 @@ export class OctoNextApp {
   private applySettings(): void {
     this.sidebar.setWidth(this.settings.sidebarWidth);
     this.sidebar.setPinned(this.settings.pinned);
+    document.documentElement.classList.toggle('octonext-repo-only', this.settings.showInRepoOnly);
   }
 
   private onNavigate(url: URL): void {
