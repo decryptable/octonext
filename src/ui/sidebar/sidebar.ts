@@ -1,53 +1,43 @@
 import type { DockSide } from '../../shared/settings';
 import type { RepoRef } from '../../core/types';
 import { CSS_PREFIX, CSS_VARS, ELEMENT_IDS, ROOT_CLASS } from '../../shared/constants';
-import { clear, h } from '../dom';
+import { h } from '../dom';
+import type { SidebarCallbacks } from './callbacks';
 import { type SidebarHeader, createHeader } from './header';
+import { PanelStack } from './panel-stack';
 import { createResizer } from './resizer';
 import { TabBar, type TabId } from './tabs';
 import { type ToggleButton, createToggle } from './toggle';
 
-export interface SidebarCallbacks {
-  onBookmark: () => void;
-  onRefresh: () => void;
-  onSettings: () => void;
-  onTabChange: (id: TabId) => void;
-  onDockChange: (dock: DockSide) => void;
-  onWidthCommit: (width: number) => void;
-  onToggleOffsetCommit: (offset: number) => void;
-}
+export type { SidebarCallbacks };
 
 export class Sidebar {
   readonly root: HTMLElement;
+  private readonly callbacks: SidebarCallbacks;
   private readonly aside: HTMLElement;
   private readonly header: SidebarHeader;
   private readonly tabs: TabBar;
   private readonly toggle: ToggleButton;
-  private readonly panels: Record<TabId, HTMLElement>;
+  private readonly stack = new PanelStack();
   private width = 0;
   private dock: DockSide = 'left';
   private open = false;
   private pinned = false;
 
   constructor(callbacks: SidebarCallbacks) {
+    this.callbacks = callbacks;
     this.header = createHeader({
       onBookmark: callbacks.onBookmark,
       onDock: () => callbacks.onDockChange(this.dock === 'left' ? 'right' : 'left'),
       onRefresh: callbacks.onRefresh,
       onSettings: callbacks.onSettings,
-      onClose: () => this.setOpen(false),
+      onClose: () => this.requestClose(),
     });
     this.tabs = new TabBar((id) => callbacks.onTabChange(id));
-    this.panels = {
-      files: h('div', { class: `${CSS_PREFIX}-panel` }),
-      pr: h('div', { class: `${CSS_PREFIX}-panel`, attrs: { hidden: 'true' } }),
-      bookmarks: h('div', { class: `${CSS_PREFIX}-panel`, attrs: { hidden: 'true' } }),
-    };
-    const body = h('div', { class: `${CSS_PREFIX}-sidebar__body` }, ...Object.values(this.panels));
     const resizer = createResizer({
       getWidth: () => this.width,
       getDock: () => this.dock,
-      onResize: (width) => this.applyWidth(width),
+      onResize: (width) => this.setWidth(width),
       onCommit: (width) => callbacks.onWidthCommit(width),
     });
     this.aside = h(
@@ -55,7 +45,7 @@ export class Sidebar {
       { class: `${CSS_PREFIX}-sidebar`, attrs: { id: ELEMENT_IDS.sidebar } },
       this.header.el,
       this.tabs.el,
-      body,
+      this.stack.el,
       resizer,
     );
     this.toggle = createToggle({
@@ -66,8 +56,8 @@ export class Sidebar {
     this.showTab('files');
   }
 
-  setRepo(ref: RepoRef): void {
-    this.header.setRepo(ref);
+  setRepo(ref: RepoRef, totalSize: number): void {
+    this.header.setRepo(ref, totalSize);
   }
 
   setBookmarked(active: boolean): void {
@@ -75,13 +65,12 @@ export class Sidebar {
   }
 
   setPanel(id: TabId, node: Node): void {
-    clear(this.panels[id]);
-    this.panels[id].appendChild(node);
+    this.stack.set(id, node);
   }
 
   showTab(id: TabId): void {
     this.tabs.setActive(id);
-    for (const [tabId, panel] of Object.entries(this.panels)) panel.hidden = tabId !== id;
+    this.stack.show(id);
   }
 
   setTabVisible(id: TabId, visible: boolean): void {
@@ -103,7 +92,9 @@ export class Sidebar {
   }
 
   setWidth(width: number): void {
-    this.applyWidth(width);
+    this.width = width;
+    this.aside.style.width = `${width}px`;
+    document.documentElement.style.setProperty(CSS_VARS.sidebarWidth, `${width}px`);
   }
 
   setPinned(pinned: boolean): void {
@@ -116,16 +107,19 @@ export class Sidebar {
     if (this.open === open) return;
     this.open = open;
     document.documentElement.classList.toggle(ROOT_CLASS.open, open);
-    this.toggle.setOpen(open);
+    this.toggle.setOpen(open || this.pinned);
+  }
+
+  requestClose(): void {
+    if (this.pinned) {
+      this.pinned = false;
+      document.documentElement.classList.remove(ROOT_CLASS.pinned);
+      this.callbacks.onPinnedChange(false);
+    }
+    this.setOpen(false);
   }
 
   isOpen(): boolean {
     return this.open || this.pinned;
-  }
-
-  private applyWidth(width: number): void {
-    this.width = width;
-    this.aside.style.width = `${width}px`;
-    document.documentElement.style.setProperty(CSS_VARS.sidebarWidth, `${width}px`);
   }
 }
