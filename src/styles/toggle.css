@@ -1,7 +1,9 @@
 .octonext-toggle {
   position: fixed;
+  z-index: 1;
   top: 96px;
   left: 0;
+  right: auto;
   touch-action: none;
   display: inline-flex;
   align-items: center;
@@ -17,7 +19,10 @@
   box-shadow: 0 2px 8px var(--octonext-shadow);
   cursor: pointer;
   pointer-events: auto;
-  transition: transform 0.18s ease;
+  transition:
+    left 0.18s ease,
+    right 0.18s ease,
+    width 0.12s ease;
 }
 
 .octonext-toggle:hover {
@@ -25,7 +30,7 @@
 }
 
 html.octonext-open .octonext-toggle {
-  transform: translateX(var(--octonext-sidebar-width));
+  left: var(--octonext-sidebar-width);
 }
 
 html.octonext-dock-right .octonext-toggle {
@@ -37,7 +42,8 @@ html.octonext-dock-right .octonext-toggle {
 }
 
 html.octonext-dock-right.octonext-open .octonext-toggle {
-  transform: translateX(calc(-1 * var(--octonext-sidebar-width)));
+  left: auto;
+  right: var(--octonext-sidebar-width);
 }
 
 html.octonext-pinned .octonext-toggle {

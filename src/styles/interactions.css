@@ -16,9 +16,12 @@
 
 .octonext-icon-btn,
 .octonext-dl__button,
-.octonext-toggle,
 .octonext-tab {
   position: relative;
+  overflow: hidden;
+}
+
+.octonext-toggle {
   overflow: hidden;
 }
 
