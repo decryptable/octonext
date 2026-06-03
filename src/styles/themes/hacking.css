@@ -66,3 +66,12 @@
   background: var(--octonext-accent);
   color: #03120a;
 }
+
+#octonext-root[data-octonext-theme='hacking'] .octonext-icon-btn:hover {
+  transform: skewX(-6deg);
+  text-shadow: 0 0 8px var(--octonext-accent);
+}
+
+#octonext-root[data-octonext-theme='hacking'] .octonext-tab:hover {
+  text-shadow: 0 0 8px var(--octonext-accent);
+}

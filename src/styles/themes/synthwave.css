@@ -64,3 +64,12 @@
     filter: brightness(1.6);
   }
 }
+
+#octonext-root[data-octonext-theme='synthwave'] .octonext-icon-btn:hover {
+  filter: drop-shadow(0 0 6px var(--octonext-accent));
+  transform: translateY(-1px);
+}
+
+#octonext-root[data-octonext-theme='synthwave'] .octonext-node:hover {
+  background: linear-gradient(90deg, var(--octonext-hover), transparent);
+}

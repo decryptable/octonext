@@ -67,3 +67,12 @@
     clip-path: inset(0 0 0 0);
   }
 }
+
+#octonext-root[data-octonext-theme='retro'] .octonext-icon-btn:hover {
+  color: var(--octonext-accent);
+  text-shadow: 0 0 6px var(--octonext-accent);
+}
+
+#octonext-root[data-octonext-theme='retro'] .octonext-node:hover {
+  letter-spacing: 0.04em;
+}

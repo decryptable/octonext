@@ -65,3 +65,12 @@
     transform: translateX(-8px);
   }
 }
+
+#octonext-root[data-octonext-theme='pixel'] .octonext-icon-btn:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 2px 2px 0 var(--octonext-accent);
+}
+
+#octonext-root[data-octonext-theme='pixel'] .octonext-tab:hover {
+  background: var(--octonext-hover);
+}

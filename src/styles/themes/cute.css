@@ -52,6 +52,39 @@
   }
 }
 
+#octonext-root[data-octonext-theme='cute'] .octonext-toggle {
+  background: linear-gradient(165deg, #fff0f6, #ffd6e7);
+  color: #ff5fa2;
+  border-color: #ffc0d8;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    0 4px 12px rgba(255, 126, 182, 0.35);
+}
+
+#octonext-root[data-octonext-theme='cute'] .octonext-toggle::after {
+  content: '💕';
+  position: absolute;
+  top: -7px;
+  right: -3px;
+  font-size: 9px;
+  opacity: 0;
+  animation: octonext-cute-hearts 2.8s ease-in-out infinite;
+}
+
+#octonext-root[data-octonext-theme='cute'] .octonext-toggle:hover::after {
+  animation-duration: 1.3s;
+}
+
+@keyframes octonext-cute-hearts {
+  10% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-15px) rotate(18deg) scale(1.3);
+  }
+}
+
 #octonext-root[data-octonext-theme='cute'] .octonext-mark {
   border-radius: 6px;
 }
