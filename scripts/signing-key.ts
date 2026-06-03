@@ -12,9 +12,16 @@ export interface SigningKey {
   publicKeyDer: Buffer;
 }
 
+function fromEnv(): string | undefined {
+  const value = process.env.CRX_PRIVATE_KEY;
+  if (!value) return undefined;
+  return value.includes('BEGIN') ? value : Buffer.from(value, 'base64').toString('utf8');
+}
+
 export async function loadSigningKey(): Promise<SigningKey> {
   await mkdir(KEY_DIR, { recursive: true });
-  const privateKeyPem = existsSync(KEY_PATH) ? await readFile(KEY_PATH, 'utf8') : await createKey();
+  const privateKeyPem =
+    fromEnv() ?? (existsSync(KEY_PATH) ? await readFile(KEY_PATH, 'utf8') : await createKey());
   const publicKeyDer = createPublicKey(privateKeyPem).export({ type: 'spki', format: 'der' });
   return { privateKeyPem, publicKeyDer: publicKeyDer as Buffer };
 }
