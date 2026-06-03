@@ -1,0 +1,94 @@
+/* Glossy 3D "liquid" treatment — layered gradients, inset sheen, soft depth. */
+
+.octonext-toggle {
+  background: linear-gradient(165deg, color-mix(in srgb, var(--octonext-bg) 88%, #fff), var(--octonext-bg));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    0 4px 12px var(--octonext-shadow);
+}
+
+.octonext-toggle:hover {
+  filter: brightness(1.04);
+}
+
+.octonext-toggle:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.octonext-toggle__icon {
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.18));
+}
+
+.octonext-icon-btn {
+  transition:
+    background 0.12s ease,
+    transform 0.1s ease;
+}
+
+.octonext-icon-btn:active {
+  transform: scale(0.9);
+}
+
+.octonext-tab--active {
+  background: linear-gradient(180deg, transparent, color-mix(in srgb, var(--octonext-accent) 12%, transparent));
+}
+
+.octonext-search__input {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--octonext-hover) 60%, var(--octonext-bg)), var(--octonext-bg));
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.08);
+  transition:
+    border-color 0.12s ease,
+    box-shadow 0.12s ease;
+}
+
+.octonext-search__input:focus {
+  box-shadow:
+    inset 0 1px 2px rgba(0, 0, 0, 0.08),
+    0 0 0 3px color-mix(in srgb, var(--octonext-accent) 22%, transparent);
+}
+
+.octonext-dl {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--octonext-bg) 90%, #fff), var(--octonext-bg));
+  box-shadow: 0 -4px 14px var(--octonext-shadow);
+}
+
+.octonext-dl__button {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--octonext-accent) 82%, #fff), var(--octonext-accent));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    0 2px 6px color-mix(in srgb, var(--octonext-accent) 40%, transparent);
+  transition:
+    filter 0.12s ease,
+    transform 0.1s ease;
+}
+
+.octonext-dl__button:hover:not(:disabled) {
+  filter: brightness(1.05);
+}
+
+.octonext-dl__button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.octonext-dl__button--cancel {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--octonext-del) 80%, #fff), var(--octonext-del));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    0 2px 6px color-mix(in srgb, var(--octonext-del) 40%, transparent);
+}
+
+.octonext-mark {
+  background: color-mix(in srgb, var(--octonext-accent) 38%, transparent);
+  color: inherit;
+  border-radius: 3px;
+  padding: 0 1px;
+}
+
+html.octonext-pinned .octonext-sidebar {
+  box-shadow: none;
+  border-right-width: 2px;
+}
+
+html.octonext-pinned.octonext-dock-right .octonext-sidebar {
+  border-left-width: 2px;
+}

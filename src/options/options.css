@@ -96,16 +96,67 @@ body {
   width: 100%;
   padding: 8px 10px;
   border: 1px solid var(--border);
-  border-radius: 8px;
-  background: var(--bg);
+  border-radius: 9px;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--card) 50%, var(--bg)), var(--bg));
   color: inherit;
   font: inherit;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.08);
+  transition:
+    border-color 0.12s ease,
+    box-shadow 0.12s ease;
+}
+
+select.input {
+  appearance: none;
+  background-image:
+    linear-gradient(180deg, color-mix(in srgb, var(--card) 50%, var(--bg)), var(--bg)),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%2389929b' d='M4.4 6.5 8 10l3.6-3.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position:
+    center,
+    right 8px center;
+  background-size:
+    auto,
+    14px;
+  padding-right: 28px;
 }
 
 .input:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 1px;
+  outline: none;
   border-color: var(--accent);
+  box-shadow:
+    inset 0 1px 2px rgba(0, 0, 0, 0.08),
+    0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent);
+}
+
+input[type='checkbox'] {
+  appearance: none;
+  width: 17px;
+  height: 17px;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  background: linear-gradient(180deg, var(--card), var(--bg));
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  position: relative;
+  flex: none;
+}
+
+input[type='checkbox']:checked {
+  border-color: var(--accent);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 80%, #fff), var(--accent));
+}
+
+input[type='checkbox']:checked::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 1px;
+  width: 5px;
+  height: 9px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
 }
 
 .field {
@@ -126,7 +177,44 @@ body {
 
 .range {
   width: 100%;
-  accent-color: var(--accent);
+  height: 22px;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.range::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--border), color-mix(in srgb, var(--border) 70%, var(--bg)));
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.18);
+}
+
+.range::-moz-range-track {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--border);
+}
+
+.range::-webkit-slider-thumb {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  margin-top: -5px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff, color-mix(in srgb, var(--accent) 80%, #fff) 45%, var(--accent));
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.3),
+    inset 0 1px 1px rgba(255, 255, 255, 0.7);
+}
+
+.range::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border: none;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .field__value {
@@ -141,12 +229,6 @@ body {
   gap: 10px;
   padding: 7px 0;
   cursor: pointer;
-}
-
-.toggle input {
-  width: 16px;
-  height: 16px;
-  accent-color: var(--accent);
 }
 
 .card__status {
