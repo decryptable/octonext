@@ -59,8 +59,27 @@ export async function copyFonts(): Promise<void> {
   await cp(resolve(PUBLIC_DIR, 'fonts'), resolve(DIST_DIR, 'fonts'), { recursive: true });
 }
 
-export async function copyOptions(): Promise<void> {
+function minifyHtml(html: string): string {
+  return html
+    .replace(/<!--[\s\S]*?-->/g, '')
+    .replace(/>\s+</g, '><')
+    .replace(/\s{2,}/g, ' ')
+    .trim();
+}
+
+async function writeCss(src: string, dest: string, minify: boolean): Promise<void> {
+  if (!minify) return void (await cp(src, dest));
+  const result = await Bun.build({ entrypoints: [src], minify: true });
+  await Bun.write(dest, result.success ? result.outputs[0]! : Bun.file(src));
+}
+
+export async function copyOptions(minify = false): Promise<void> {
   await mkdir(resolve(DIST_DIR, 'options'), { recursive: true });
-  await cp(resolve(OPTIONS_SRC_DIR, 'index.html'), resolve(DIST_DIR, 'options/index.html'));
-  await cp(resolve(OPTIONS_SRC_DIR, 'options.css'), resolve(DIST_DIR, 'options/options.css'));
+  const html = await Bun.file(resolve(OPTIONS_SRC_DIR, 'index.html')).text();
+  await Bun.write(resolve(DIST_DIR, 'options/index.html'), minify ? minifyHtml(html) : html);
+  await writeCss(
+    resolve(OPTIONS_SRC_DIR, 'options.css'),
+    resolve(DIST_DIR, 'options/options.css'),
+    minify,
+  );
 }

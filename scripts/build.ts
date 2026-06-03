@@ -47,7 +47,7 @@ async function rebuildCode(minify: boolean, target: BuildTarget): Promise<void> 
     bundleScripts(minify),
     bundleStyles(minify),
     writeManifest(target),
-    copyOptions(),
+    copyOptions(minify),
   ]);
 }
 

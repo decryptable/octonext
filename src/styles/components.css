@@ -80,12 +80,19 @@
 }
 
 
+.octonext-header__star {
+  color: var(--octonext-muted);
+  opacity: 0.55;
+}
+
 .octonext-header__star.octonext-icon-btn--active {
-  color: #e3b341;
+  color: #f0b429;
+  opacity: 1;
 }
 
 .octonext-header__star.octonext-icon-btn--active svg {
-  filter: drop-shadow(0 0 4px rgba(227, 179, 65, 0.5));
+  filter: drop-shadow(0 0 5px rgba(240, 180, 41, 0.6));
+  transform: scale(1.12);
 }
 
 .octonext-header__donate {
