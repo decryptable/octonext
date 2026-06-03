@@ -22,7 +22,7 @@ import {
 function toSvg(def: IconDefinition): string {
   const [width, height, , , path] = def.icon;
   const data = Array.isArray(path) ? path.join('') : path;
-  return `<svg viewBox="0 0 ${width} ${height}" width="1em" height="1em" aria-hidden="true" fill="currentColor"><path d="${data}"/></svg>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" width="1em" height="1em" aria-hidden="true" fill="currentColor"><path d="${data}"/></svg>`;
 }
 
 const DEFS = {
