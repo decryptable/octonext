@@ -67,8 +67,39 @@
 }
 
 .octonext-node__label {
+  flex: 1;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.octonext-node__size {
+  flex: none;
+  color: var(--octonext-muted);
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  opacity: 0;
+  transition: opacity 0.1s ease;
+}
+
+.octonext-node:hover .octonext-node__size,
+.octonext-node--active .octonext-node__size {
+  opacity: 1;
+}
+
+.octonext-node__check {
+  flex: none;
+  width: 13px;
+  height: 13px;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+  accent-color: var(--octonext-accent);
+}
+
+.octonext-node:hover .octonext-node__check,
+.octonext-node__check:checked,
+.octonext-node__check:indeterminate {
+  opacity: 1;
 }
 
 .octonext-node__children[hidden] {

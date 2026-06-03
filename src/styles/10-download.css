@@ -1,0 +1,47 @@
+.octonext-header__meta {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  min-width: 0;
+}
+
+.octonext-header__size {
+  color: var(--octonext-muted);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.octonext-dl {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-top: 1px solid var(--octonext-border);
+  background: var(--octonext-bg);
+}
+
+.octonext-dl[hidden] {
+  display: none;
+}
+
+.octonext-dl__label {
+  flex: 1;
+  color: var(--octonext-muted);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.octonext-dl__button {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 6px;
+  background: var(--octonext-accent);
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.octonext-dl__button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
