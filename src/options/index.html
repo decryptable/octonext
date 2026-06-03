@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>OctoNext — Settings</title>
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <main class="options">
+      <h1 class="options__title">OctoNext</h1>
+      <p class="options__subtitle">Code tree sidebar for GitHub.</p>
+
+      <section class="field">
+        <label class="field__label" for="token">GitHub access token</label>
+        <input id="token" class="field__input" type="password" autocomplete="off"
+          placeholder="ghp_…" />
+        <p class="field__hint">
+          Optional. Enables private repositories and raises the API rate limit.
+        </p>
+      </section>
+
+      <label class="toggle">
+        <input id="collapseDirectories" type="checkbox" />
+        <span>Collapse single-child directories</span>
+      </label>
+      <label class="toggle">
+        <input id="showInRepoOnly" type="checkbox" />
+        <span>Only show the sidebar on repository pages</span>
+      </label>
+      <label class="toggle">
+        <input id="pinned" type="checkbox" />
+        <span>Keep the sidebar pinned open</span>
+      </label>
+
+      <p id="status" class="options__status" role="status"></p>
+    </main>
+    <script type="module" src="options.js"></script>
+  </body>
+</html>
