@@ -281,15 +281,32 @@ input[type='checkbox']:checked::before {
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
 }
 
+.sselect__trigger:focus-visible {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow:
+    inset 0 1px 2px rgba(0, 0, 0, 0.08),
+    0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent);
+}
+
 .sselect__search {
   width: 100%;
   padding: 7px 9px;
   margin-bottom: 6px;
   border: 1px solid var(--border);
   border-radius: 7px;
-  background: var(--card);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--card) 60%, var(--bg)), var(--bg));
   color: inherit;
   font: inherit;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.sselect__search:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow:
+    inset 0 1px 2px rgba(0, 0, 0, 0.08),
+    0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent);
 }
 
 .sselect__list {
