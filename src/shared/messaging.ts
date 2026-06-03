@@ -19,8 +19,12 @@ export type MessageHandler = {
 
 export async function sendMessage<K extends Message['type']>(
   message: Extract<Message, { type: K }>,
-): Promise<MessageResult[K]> {
-  return (await browser.runtime.sendMessage(message)) as MessageResult[K];
+): Promise<MessageResult[K] | undefined> {
+  try {
+    return (await browser.runtime.sendMessage(message)) as MessageResult[K];
+  } catch {
+    return undefined;
+  }
 }
 
 export function registerMessageHandler(handlers: Partial<MessageHandler>): void {

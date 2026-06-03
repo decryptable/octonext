@@ -8,7 +8,11 @@ export function observeNavigation(onChange: NavigationListener): () => void {
   const notify = () => {
     if (location.href === lastHref) return;
     lastHref = location.href;
-    onChange(new URL(location.href));
+    try {
+      onChange(new URL(location.href));
+    } catch {
+      void 0;
+    }
   };
 
   const schedule = () => queueMicrotask(notify);

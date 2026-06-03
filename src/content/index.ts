@@ -1,4 +1,5 @@
 import { OctoNextApp } from './app';
+import { isExtensionContextValid } from '../shared/browser';
 import { logger } from '../shared/logger';
 
 declare global {
@@ -9,8 +10,13 @@ declare global {
 
 function bootstrap(): void {
   if (window.top !== window || window.__octonext__) return;
+  if (!isExtensionContextValid()) return;
   window.__octonext__ = true;
-  new OctoNextApp().start().catch((error) => logger.error(error));
+  try {
+    new OctoNextApp().start().catch((error) => logger.error(error));
+  } catch (error) {
+    logger.error(error);
+  }
 }
 
 bootstrap();

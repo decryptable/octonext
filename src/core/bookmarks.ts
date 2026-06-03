@@ -7,12 +7,20 @@ const KEY = `${APP_SLUG}:bookmarks`;
 export type BookmarksListener = (bookmarks: Bookmark[]) => void;
 
 export async function loadBookmarks(): Promise<Bookmark[]> {
-  const stored = await browser.storage.local.get(KEY);
-  return (stored[KEY] as Bookmark[] | undefined) ?? [];
+  try {
+    const stored = await browser.storage.local.get(KEY);
+    return (stored[KEY] as Bookmark[] | undefined) ?? [];
+  } catch {
+    return [];
+  }
 }
 
 async function persist(bookmarks: Bookmark[]): Promise<Bookmark[]> {
-  await browser.storage.local.set({ [KEY]: bookmarks });
+  try {
+    await browser.storage.local.set({ [KEY]: bookmarks });
+  } catch {
+    void 0;
+  }
   return bookmarks;
 }
 

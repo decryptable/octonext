@@ -17,7 +17,7 @@ async function register(origin: string): Promise<void> {
       },
     ]);
   } catch {
-    // Already registered for this origin.
+    void 0;
   }
 }
 
@@ -25,7 +25,7 @@ async function unregister(origin: string): Promise<void> {
   try {
     await chrome.scripting.unregisterContentScripts({ ids: [SCRIPT_ID(origin)] });
   } catch {
-    // Nothing registered for this origin.
+    void 0;
   }
 }
 

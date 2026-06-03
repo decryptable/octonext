@@ -7,13 +7,21 @@ const STORAGE_KEY = `${APP_SLUG}:settings`;
 export type SettingsListener = (settings: Settings) => void;
 
 export async function loadSettings(): Promise<Settings> {
-  const stored = await browser.storage.sync.get(STORAGE_KEY);
-  return mergeSettings(stored[STORAGE_KEY] as Partial<Settings> | undefined);
+  try {
+    const stored = await browser.storage.sync.get(STORAGE_KEY);
+    return mergeSettings(stored[STORAGE_KEY] as Partial<Settings> | undefined);
+  } catch {
+    return mergeSettings(undefined);
+  }
 }
 
 export async function saveSettings(patch: Partial<Settings>): Promise<Settings> {
   const next = { ...(await loadSettings()), ...patch };
-  await browser.storage.sync.set({ [STORAGE_KEY]: next });
+  try {
+    await browser.storage.sync.set({ [STORAGE_KEY]: next });
+  } catch {
+    void 0;
+  }
   return next;
 }
 
