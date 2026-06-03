@@ -6,11 +6,13 @@
   --octonext-hover: #f3f4f6;
   --octonext-active: #ddf4ff;
   --octonext-accent: #2da44e;
+  --octonext-add: #1a7f37;
+  --octonext-del: #cf222e;
   --octonext-shadow: rgba(31, 35, 40, 0.12);
 }
 
 @media (prefers-color-scheme: dark) {
-  #octonext-root {
+  #octonext-root:not([data-octonext-theme]) {
     --octonext-bg: #0d1117;
     --octonext-fg: #e6edf3;
     --octonext-muted: #9198a1;
@@ -18,6 +20,8 @@
     --octonext-hover: #161b22;
     --octonext-active: #163356;
     --octonext-accent: #3fb950;
+    --octonext-add: #3fb950;
+    --octonext-del: #f85149;
     --octonext-shadow: rgba(1, 4, 9, 0.5);
   }
 }
@@ -27,7 +31,8 @@
   position: fixed;
   inset: 0 auto 0 0;
   z-index: 2147483000;
-  font: 13px/1.5 -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 13px;
   pointer-events: none;
 }
 
@@ -37,6 +42,11 @@
 
 html.octonext-pinned body {
   margin-left: var(--octonext-sidebar-width);
+}
+
+html.octonext-pinned.octonext-dock-right body {
+  margin-left: 0;
+  margin-right: var(--octonext-sidebar-width);
 }
 
 body.octonext-resizing {

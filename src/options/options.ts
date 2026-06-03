@@ -1,9 +1,15 @@
+import { validateToken } from '../core/github/auth';
+import { FONT_SIZE } from '../shared/constants';
+import { FONTS } from '../shared/fonts';
 import type { Settings } from '../shared/settings';
 import { loadSettings, saveSettings } from '../shared/storage';
+import { THEMES } from '../shared/theme';
 
-type BooleanKey = 'collapseDirectories' | 'showInRepoOnly' | 'pinned';
+type SelectKey = 'theme' | 'font' | 'iconPack' | 'dock';
+type ToggleKey = 'collapseDirectories' | 'showInRepoOnly' | 'pinned';
 
-const BOOLEAN_FIELDS: BooleanKey[] = ['collapseDirectories', 'showInRepoOnly', 'pinned'];
+const TOGGLES: ToggleKey[] = ['collapseDirectories', 'showInRepoOnly', 'pinned'];
+const SELECTS: SelectKey[] = ['theme', 'font', 'iconPack', 'dock'];
 
 function byId<T extends HTMLElement>(id: string): T {
   const el = document.getElementById(id);
@@ -11,10 +17,19 @@ function byId<T extends HTMLElement>(id: string): T {
   return el as T;
 }
 
-function flash(message: string): void {
+function fillOptions(select: HTMLSelectElement, items: { id: string; label: string }[]): void {
+  for (const item of items) {
+    const option = document.createElement('option');
+    option.value = item.id;
+    option.textContent = item.label;
+    select.appendChild(option);
+  }
+}
+
+function flash(text: string): void {
   const status = byId<HTMLParagraphElement>('status');
-  status.textContent = message;
-  window.setTimeout(() => (status.textContent = ''), 1500);
+  status.textContent = text;
+  window.setTimeout(() => (status.textContent = ''), 1200);
 }
 
 async function commit(patch: Partial<Settings>): Promise<void> {
@@ -22,12 +37,58 @@ async function commit(patch: Partial<Settings>): Promise<void> {
   flash('Saved');
 }
 
-function bind(settings: Settings): void {
-  const token = byId<HTMLInputElement>('token');
-  token.value = settings.accessToken;
-  token.addEventListener('change', () => void commit({ accessToken: token.value.trim() }));
+function setTokenStatus(text: string, kind: 'ok' | 'error' | 'pending'): void {
+  const status = byId<HTMLParagraphElement>('tokenStatus');
+  status.textContent = text;
+  status.dataset.kind = kind;
+}
 
-  for (const key of BOOLEAN_FIELDS) {
+async function applyToken(value: string): Promise<void> {
+  if (!value) {
+    await saveSettings({ accessToken: '' });
+    setTokenStatus('No token set — public repositories only.', 'pending');
+    return;
+  }
+  setTokenStatus('Validating…', 'pending');
+  const check = await validateToken(value);
+  if (!check.ok) {
+    setTokenStatus(check.message ?? 'Invalid token.', 'error');
+    return;
+  }
+  await saveSettings({ accessToken: value });
+  setTokenStatus(`Signed in as ${check.login}. Token saved.`, 'ok');
+}
+
+function bindToken(settings: Settings): void {
+  const token = byId<HTMLInputElement>('accessToken');
+  token.value = settings.accessToken;
+  if (settings.accessToken) setTokenStatus('A token is saved.', 'ok');
+  token.addEventListener('change', () => void applyToken(token.value.trim()));
+}
+
+function bindFontSize(settings: Settings): void {
+  const range = byId<HTMLInputElement>('fontSize');
+  const output = byId<HTMLOutputElement>('fontSizeValue');
+  range.min = String(FONT_SIZE.min);
+  range.max = String(FONT_SIZE.max);
+  range.value = String(settings.fontSize);
+  output.textContent = `${settings.fontSize}px`;
+  range.addEventListener('input', () => (output.textContent = `${range.value}px`));
+  range.addEventListener('change', () => void commit({ fontSize: Number(range.value) }));
+}
+
+function bindSelects(settings: Settings): void {
+  fillOptions(byId<HTMLSelectElement>('theme'), THEMES);
+  fillOptions(byId<HTMLSelectElement>('font'), FONTS);
+  for (const key of SELECTS) {
+    const select = byId<HTMLSelectElement>(key);
+    select.value = String(settings[key]);
+    select.addEventListener('change', () => void commit({ [key]: select.value }));
+  }
+}
+
+function bindToggles(settings: Settings): void {
+  for (const key of TOGGLES) {
     const input = byId<HTMLInputElement>(key);
     input.checked = settings[key];
     input.addEventListener('change', () => void commit({ [key]: input.checked }));
@@ -35,7 +96,11 @@ function bind(settings: Settings): void {
 }
 
 async function main(): Promise<void> {
-  bind(await loadSettings());
+  const settings = await loadSettings();
+  bindToken(settings);
+  bindSelects(settings);
+  bindFontSize(settings);
+  bindToggles(settings);
 }
 
 void main();

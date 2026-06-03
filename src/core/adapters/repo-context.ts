@@ -27,36 +27,33 @@ const RESERVED_OWNERS = new Set([
   'issues',
 ]);
 
-const NON_TREE_TABS = new Set([
-  'issues',
-  'pull',
-  'pulls',
-  'actions',
-  'projects',
-  'wiki',
-  'settings',
-]);
+const TREE_TABS = new Set(['tree', 'blob']);
 
 export function parseRepoContext(url: URL, host: string): RepoContext | null {
   if (url.hostname !== host) return null;
   const segments = url.pathname.split('/').filter(Boolean);
   if (segments.length < 2) return null;
 
-  const [owner, repo, tab, branch, ...rest] = segments;
+  const [owner, repo, tab, ...rest] = segments;
   if (!owner || !repo || RESERVED_OWNERS.has(owner)) return null;
-  if (tab && NON_TREE_TABS.has(tab)) return null;
 
-  const onTreeView = tab === 'tree' || tab === 'blob';
-  return {
-    host,
-    owner,
-    repo,
-    branch: onTreeView && branch ? branch : '',
-    currentPath: onTreeView ? rest.join('/') : '',
-  };
+  const base = { host, owner, repo };
+  if (tab === 'pull' && rest[0]) {
+    const pullNumber = Number.parseInt(rest[0], 10);
+    if (Number.isFinite(pullNumber)) return { ...base, view: 'pull', rawRef: '', pullNumber };
+  }
+  if (!tab || TREE_TABS.has(tab)) {
+    return { ...base, view: 'tree', rawRef: rest.join('/'), pullNumber: null };
+  }
+  return { ...base, view: 'other', rawRef: '', pullNumber: null };
 }
 
-export function sameRepo(a: RepoContext | null, b: RepoContext | null): boolean {
+export function repoKey(context: RepoContext | null): string | null {
+  if (!context) return null;
+  return `${context.host}/${context.owner}/${context.repo}`;
+}
+
+export function sameRepoTarget(a: RepoContext | null, b: RepoContext | null): boolean {
   if (!a || !b) return a === b;
-  return a.host === b.host && a.owner === b.owner && a.repo === b.repo && a.branch === b.branch;
+  return repoKey(a) === repoKey(b) && a.rawRef === b.rawRef && a.pullNumber === b.pullNumber;
 }

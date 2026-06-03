@@ -47,3 +47,31 @@
   color: #ffffff;
   cursor: pointer;
 }
+
+.octonext-icon-btn svg {
+  width: 15px;
+  height: 15px;
+  display: block;
+}
+
+.octonext-header__logo {
+  width: 18px;
+  height: 18px;
+}
+
+.octonext-toggle__icon {
+  width: 18px;
+  height: 18px;
+}
+
+.octonext-node__chevron {
+  width: 11px;
+  height: 11px;
+}
+
+.octonext-node__icon--folder,
+.octonext-node__icon--file {
+  width: 15px;
+  height: 15px;
+}
+

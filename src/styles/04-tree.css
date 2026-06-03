@@ -1,13 +1,15 @@
 .octonext-tree {
   display: flex;
   flex-direction: column;
+  padding: 4px 0;
+  font-size: var(--octonext-font-size, 13px);
 }
 
 .octonext-node {
   display: flex;
   align-items: center;
-  gap: 6px;
-  height: 26px;
+  gap: 5px;
+  height: 24px;
   padding-right: 10px;
   cursor: pointer;
   white-space: nowrap;
@@ -44,8 +46,16 @@
   flex: none;
 }
 
-.octonext-node__icon {
+.octonext-node__icon-box {
+  display: inline-flex;
   flex: none;
+  width: 16px;
+  height: 16px;
+}
+
+.octonext-node__icon {
+  width: 16px;
+  height: 16px;
 }
 
 .octonext-node__icon--folder {
@@ -63,4 +73,47 @@
 
 .octonext-node__children[hidden] {
   display: none;
+}
+
+.octonext-results {
+  display: flex;
+  flex-direction: column;
+  padding: 4px 0;
+  font-size: var(--octonext-font-size, 13px);
+}
+
+.octonext-result {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  cursor: pointer;
+}
+
+.octonext-result:hover {
+  background: var(--octonext-hover);
+}
+
+.octonext-result__text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.octonext-result__name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.octonext-result__path {
+  color: var(--octonext-muted);
+  font-size: 11px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.octonext-results__empty {
+  padding: 24px 12px;
+  text-align: center;
+  color: var(--octonext-muted);
 }

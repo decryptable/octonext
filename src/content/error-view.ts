@@ -18,7 +18,7 @@ export function buildErrorView(error: unknown, onOpenSettings: () => void): HTML
     if (error.status === 404) {
       return message(
         'error',
-        'Repository not found. A token is required for private repos.',
+        'Not found. If this is a private repository, add an access token in settings.',
         action,
       );
     }

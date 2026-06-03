@@ -8,30 +8,56 @@
   </head>
   <body>
     <main class="options">
-      <h1 class="options__title">OctoNext</h1>
-      <p class="options__subtitle">Code tree sidebar for GitHub.</p>
+      <header class="options__head">
+        <img class="options__logo" src="../icons/icon48.png" alt="" width="36" height="36" />
+        <div>
+          <h1 class="options__title">OctoNext</h1>
+          <p class="options__subtitle">Code tree sidebar for GitHub — fully local, no servers.</p>
+        </div>
+      </header>
 
-      <section class="field">
-        <label class="field__label" for="token">GitHub access token</label>
-        <input id="token" class="field__input" type="password" autocomplete="off"
-          placeholder="ghp_…" />
-        <p class="field__hint">
-          Optional. Enables private repositories and raises the API rate limit.
+      <section class="card">
+        <h2 class="card__title">GitHub access</h2>
+        <p class="card__hint">
+          Needed only for private repositories and a higher API rate limit. Create a
+          <a href="https://github.com/settings/tokens?type=beta" target="_blank" rel="noreferrer">
+            personal access token</a
+          >
+          with read access. It is stored locally and never sent anywhere but GitHub.
         </p>
+        <input id="accessToken" class="input" type="password" autocomplete="off" placeholder="github_pat_… / ghp_…" title="Personal access token with repository read access" />
+        <p id="tokenStatus" class="card__status" role="status"></p>
       </section>
 
-      <label class="toggle">
-        <input id="collapseDirectories" type="checkbox" />
-        <span>Collapse single-child directories</span>
-      </label>
-      <label class="toggle">
-        <input id="showInRepoOnly" type="checkbox" />
-        <span>Only show the sidebar on repository pages</span>
-      </label>
-      <label class="toggle">
-        <input id="pinned" type="checkbox" />
-        <span>Keep the sidebar pinned open</span>
-      </label>
+      <section class="card">
+        <h2 class="card__title">Appearance</h2>
+        <label class="field"><span>Theme</span><select id="theme" class="input"></select></label>
+        <label class="field"><span>Font</span><select id="font" class="input"></select></label>
+        <label class="field">
+          <span>Font size</span>
+          <input id="fontSize" class="range" type="range" />
+          <output id="fontSizeValue" class="field__value"></output>
+        </label>
+        <label class="field"><span>File icons</span>
+          <select id="iconPack" class="input">
+            <option value="material">Material (VS Code)</option>
+            <option value="minimal">Minimal</option>
+          </select>
+        </label>
+        <label class="field"><span>Dock side</span>
+          <select id="dock" class="input">
+            <option value="left">Left</option>
+            <option value="right">Right</option>
+          </select>
+        </label>
+      </section>
+
+      <section class="card">
+        <h2 class="card__title">Behavior</h2>
+        <label class="toggle"><input id="collapseDirectories" type="checkbox" /><span>Collapse single-child folders</span></label>
+        <label class="toggle"><input id="showInRepoOnly" type="checkbox" /><span>Only show on repository pages</span></label>
+        <label class="toggle"><input id="pinned" type="checkbox" /><span>Keep the sidebar pinned open</span></label>
+      </section>
 
       <p id="status" class="options__status" role="status"></p>
     </main>

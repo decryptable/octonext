@@ -1,0 +1,71 @@
+.octonext-toggle {
+  position: fixed;
+  top: 96px;
+  left: 0;
+  touch-action: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid var(--octonext-border);
+  border-left: none;
+  border-radius: 0 8px 8px 0;
+  background: var(--octonext-bg);
+  color: var(--octonext-accent);
+  box-shadow: 0 2px 8px var(--octonext-shadow);
+  cursor: pointer;
+  pointer-events: auto;
+  transition: transform 0.18s ease;
+}
+
+.octonext-toggle:hover {
+  width: 36px;
+}
+
+html.octonext-open .octonext-toggle {
+  transform: translateX(var(--octonext-sidebar-width));
+}
+
+html.octonext-dock-right .octonext-toggle {
+  left: auto;
+  right: 0;
+  border: 1px solid var(--octonext-border);
+  border-right: none;
+  border-radius: 8px 0 0 8px;
+}
+
+html.octonext-dock-right.octonext-open .octonext-toggle {
+  transform: translateX(calc(-1 * var(--octonext-sidebar-width)));
+}
+
+html.octonext-pinned .octonext-toggle {
+  display: none;
+}
+
+.octonext-toggle--dragging {
+  cursor: grabbing;
+  transition: none;
+}
+
+.octonext-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--octonext-muted);
+  cursor: pointer;
+}
+
+.octonext-icon-btn:hover {
+  background: var(--octonext-hover);
+  color: var(--octonext-fg);
+}
+
+.octonext-icon-btn--active {
+  color: var(--octonext-accent);
+}

@@ -1,8 +1,9 @@
+import type { IconResolver } from '../../core/icons/icon-resolver';
 import type { TreeNode } from '../../core/types';
 import { CSS_PREFIX } from '../../shared/constants';
-import { ICONS } from '../icons';
 import { h, svg } from '../dom';
-import { nodeIcon } from './node-icon';
+import { ICONS } from '../icons';
+import { renderNodeIcon } from './node-icon';
 
 const INDENT = 14;
 
@@ -17,9 +18,19 @@ export interface NodeRow {
   setActive: (active: boolean) => void;
 }
 
-export function createRow(node: TreeNode, depth: number, callbacks: RowCallbacks): NodeRow {
+export function createRow(
+  node: TreeNode,
+  depth: number,
+  resolver: IconResolver,
+  callbacks: RowCallbacks,
+): NodeRow {
   const isDir = node.type === 'tree';
-  const chevron = svg(ICONS.chevron, `${CSS_PREFIX}-node__chevron`);
+  const iconBox = h('span', { class: `${CSS_PREFIX}-node__icon-box` });
+  renderNodeIcon(iconBox, resolver, node, false);
+  const chevron = isDir
+    ? svg(ICONS.chevron, `${CSS_PREFIX}-node__chevron`)
+    : h('span', { class: `${CSS_PREFIX}-node__chevron--spacer` });
+
   const row = h(
     'div',
     {
@@ -31,14 +42,17 @@ export function createRow(node: TreeNode, depth: number, callbacks: RowCallbacks
         keydown: (event) => onKeydown(event as KeyboardEvent, node, isDir, callbacks),
       },
     },
-    isDir ? chevron : h('span', { class: `${CSS_PREFIX}-node__chevron--spacer` }),
-    nodeIcon(node),
+    chevron,
+    iconBox,
     h('span', { class: `${CSS_PREFIX}-node__label`, text: node.name }),
   );
 
   return {
     el: row,
-    setExpanded: (expanded) => row.classList.toggle(`${CSS_PREFIX}-node--expanded`, expanded),
+    setExpanded: (expanded) => {
+      row.classList.toggle(`${CSS_PREFIX}-node--expanded`, expanded);
+      if (isDir) renderNodeIcon(iconBox, resolver, node, expanded);
+    },
     setActive: (active) => row.classList.toggle(`${CSS_PREFIX}-node--active`, active),
   };
 }

@@ -1,26 +1,50 @@
-const wrap = (path: string, size = 16): string =>
-  `<svg viewBox="0 0 16 16" width="${size}" height="${size}" aria-hidden="true" fill="currentColor">${path}</svg>`;
+import type { IconDefinition } from '@fortawesome/fontawesome-svg-core';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import {
+  faAnglesDown,
+  faAnglesUp,
+  faArrowsRotate,
+  faBookmark,
+  faChevronRight,
+  faCodePullRequest,
+  faFile,
+  faFolder,
+  faGear,
+  faGripVertical,
+  faMagnifyingGlass,
+  faStar,
+  faTableColumns,
+  faTrash,
+  faXmark,
+} from '@fortawesome/free-solid-svg-icons';
 
-export const ICONS = {
-  chevron: wrap('<path d="M6 4l4 4-4 4V4z"/>'),
-  folder: wrap(
-    '<path d="M1.75 2.5A1.75 1.75 0 0 0 0 4.25v7.5C0 12.99 1.01 14 2.25 14h11.5c1.24 0 2.25-1.01 2.25-2.25V5.75A1.75 1.75 0 0 0 14.25 4H7.5L6.06 2.56A1.75 1.75 0 0 0 4.82 2H1.75z"/>',
-  ),
-  file: wrap(
-    '<path d="M3.75 1.5A1.75 1.75 0 0 0 2 3.25v9.5C2 13.99 3.01 15 4.25 15h7.5c1.24 0 2.25-1.01 2.25-2.25V6.5L9 1.5H3.75zM9 2.75 12.75 6.5H9.75A.75.75 0 0 1 9 5.75V2.75z"/>',
-  ),
-  logo: wrap(
-    '<path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38v-1.5c-2.23.48-2.7-1.07-2.7-1.07-.36-.92-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.8.06 1.23.83 1.23.83.72 1.23 1.87.87 2.33.66.07-.52.28-.87.5-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.03 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48v2.2c0 .21.15.45.55.38A8 8 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>',
-  ),
-  refresh: wrap(
-    '<path d="M8 3a5 5 0 1 0 4.546 2.914l1.273-.546A6.5 6.5 0 1 1 8 1.5V0l3 2-3 2V3z"/>',
-  ),
-  settings: wrap(
-    '<path d="M8 4.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7zM6 8a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>',
-  ),
-  close: wrap(
-    '<path d="M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.75.75 0 1 1 1.06 1.06L9.06 8l3.22 3.22a.75.75 0 1 1-1.06 1.06L8 9.06l-3.22 3.22a.75.75 0 0 1-1.06-1.06L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06z"/>',
-  ),
+function toSvg(def: IconDefinition): string {
+  const [width, height, , , path] = def.icon;
+  const data = Array.isArray(path) ? path.join('') : path;
+  return `<svg viewBox="0 0 ${width} ${height}" width="1em" height="1em" aria-hidden="true" fill="currentColor"><path d="${data}"/></svg>`;
+}
+
+const DEFS = {
+  logo: faGithub,
+  chevron: faChevronRight,
+  search: faMagnifyingGlass,
+  expandAll: faAnglesDown,
+  collapseAll: faAnglesUp,
+  star: faStar,
+  pullRequest: faCodePullRequest,
+  refresh: faArrowsRotate,
+  settings: faGear,
+  close: faXmark,
+  dock: faTableColumns,
+  trash: faTrash,
+  bookmark: faBookmark,
+  grip: faGripVertical,
+  file: faFile,
+  folder: faFolder,
 } as const;
 
-export type IconName = keyof typeof ICONS;
+export const ICONS = Object.fromEntries(
+  Object.entries(DEFS).map(([name, def]) => [name, toSvg(def)]),
+) as Record<keyof typeof DEFS, string>;
+
+export type IconName = keyof typeof DEFS;

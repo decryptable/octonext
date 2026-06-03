@@ -1,8 +1,10 @@
+import type { DockSide } from '../../shared/settings';
 import { CSS_PREFIX, SIDEBAR_WIDTH } from '../../shared/constants';
 import { h } from '../dom';
 
 export interface ResizerCallbacks {
   getWidth: () => number;
+  getDock: () => DockSide;
   onResize: (width: number) => void;
   onCommit: (width: number) => void;
 }
@@ -18,7 +20,8 @@ export function createResizer(callbacks: ResizerCallbacks): HTMLElement {
   });
 
   const onMove = (event: PointerEvent) => {
-    width = clamp(startWidth + (event.clientX - startX));
+    const delta = event.clientX - startX;
+    width = clamp(startWidth + (callbacks.getDock() === 'left' ? delta : -delta));
     callbacks.onResize(width);
   };
 

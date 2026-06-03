@@ -1,0 +1,70 @@
+.octonext-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--octonext-border);
+}
+
+.octonext-tab {
+  flex: 1;
+  padding: 8px 4px;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: var(--octonext-muted);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.octonext-tab[hidden] {
+  display: none;
+}
+
+.octonext-tab:hover {
+  color: var(--octonext-fg);
+}
+
+.octonext-tab--active {
+  color: var(--octonext-fg);
+  border-bottom-color: var(--octonext-accent);
+  font-weight: 600;
+}
+
+.octonext-files {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+}
+
+.octonext-files__toolbar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--octonext-border);
+}
+
+.octonext-search {
+  flex: 1;
+}
+
+.octonext-search__input {
+  width: 100%;
+  padding: 5px 8px;
+  border: 1px solid var(--octonext-border);
+  border-radius: 6px;
+  background: var(--octonext-bg);
+  color: inherit;
+  font: inherit;
+  font-size: 12px;
+}
+
+.octonext-search__input:focus {
+  outline: none;
+  border-color: var(--octonext-accent);
+}
+
+.octonext-files__body {
+  flex: 1;
+  overflow: auto;
+}

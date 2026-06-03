@@ -1,7 +1,16 @@
-import { SIDEBAR_WIDTH } from './constants';
+import { FONT_SIZE, SIDEBAR_WIDTH } from './constants';
+
+export type DockSide = 'left' | 'right';
+export type IconPack = 'material' | 'minimal';
 
 export interface Settings {
   accessToken: string;
+  theme: string;
+  font: string;
+  fontSize: number;
+  iconPack: IconPack;
+  dock: DockSide;
+  toggleOffset: number;
   sidebarWidth: number;
   pinned: boolean;
   showInRepoOnly: boolean;
@@ -11,6 +20,12 @@ export interface Settings {
 
 export const DEFAULT_SETTINGS: Settings = {
   accessToken: '',
+  theme: 'auto',
+  font: 'system',
+  fontSize: FONT_SIZE.default,
+  iconPack: 'material',
+  dock: 'left',
+  toggleOffset: 96,
   sidebarWidth: SIDEBAR_WIDTH.default,
   pinned: false,
   showInRepoOnly: true,

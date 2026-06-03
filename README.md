@@ -2,42 +2,60 @@
 
 A fast, clean **code tree sidebar for GitHub**, built as a Manifest V3 browser
 extension with TypeScript and [Bun](https://bun.sh). OctoNext renders a
-collapsible file tree for any repository so you can browse code without
-constant page loads.
-
-> Status: early foundation. The core tree sidebar works; more features are on
-> the roadmap below.
+collapsible file tree for any repository so you can browse code without constant
+page loads. Everything runs locally — there is **no backend and no telemetry**.
 
 ## Features
 
-- File tree sidebar injected on `github.com` repository pages
-- Powered by the GitHub REST API (`git/trees`) with optional access token
-- Resizable and pinnable sidebar with persisted preferences
-- SPA-aware: follows GitHub's in-page (Turbo/pjax) navigation
-- Optional GitHub Enterprise support via per-domain opt-in (right-click the
-  toolbar icon → "Enable OctoNext on this domain")
-- Zero UI frameworks — small, dependency-light, framework-free DOM
+- **File tree sidebar** on `github.com` repository pages, powered by the GitHub
+  REST API with lazy folder loading for large repositories
+- **VS Code file icons** via the Material Icon Theme, plus a minimal icon pack
+- **Themes** — Auto, GitHub Light/Dark/Dimmed, One Dark, Dracula, Nord, Monokai,
+  Solarized, Gruvbox, Tokyo Night
+- **Fonts** — pick from bundled coding fonts (JetBrains Mono, Fira Code, …) or
+  system fonts
+- **Search** files by name with instant filtering
+- **Bookmarks** — save repositories locally and jump back any time
+- **Pull request panel** — changed files and review comments, click to jump to
+  the diff or comment
+- **Dock** the sidebar left or right, resize it, pin it open, and drag the
+  toggle button to any height
+- **Expand all / collapse all**, keyboard navigation, custom scrollbars
+- **GitHub Enterprise** support via per-domain opt-in (right-click the toolbar
+  icon → “Enable OctoNext on this domain”)
+
+GitHub sign-in is **only** needed for private repositories: paste a personal
+access token in the options page. The token is validated against GitHub before
+it is saved and is stored locally in `chrome.storage`.
 
 ## Install (from source)
 
 ```bash
 bun install
-bun run build
+bun run build      # outputs the unpacked extension to dist/
 ```
 
-Then load the extension:
+- **Chrome / Edge**: open `chrome://extensions`, enable Developer mode, click
+  **Load unpacked**, and select `dist/`.
+- **Firefox**: run `bun run package` and load
+  `release/octonext-firefox-vX.Y.Z.zip` via `about:debugging` → This Firefox →
+  Load Temporary Add-on.
 
-1. Open `chrome://extensions`
-2. Enable **Developer mode**
-3. Click **Load unpacked** and select the generated `dist/` folder
+## Packaging for the stores
 
-Add a [personal access token](https://github.com/settings/tokens) in the
-extension options to browse private repositories and raise the API rate limit.
+```bash
+bun run package
+```
+
+Produces store-ready archives in `release/`:
+
+- `octonext-chrome-vX.Y.Z.zip` — Chrome Web Store (MV3, service worker)
+- `octonext-firefox-vX.Y.Z.zip` — Firefox Add-ons (MV3, `browser_specific_settings`)
 
 ## Development
 
 ```bash
-bun run dev        # rebuild on change into dist/
+bun run dev        # rebuild on change into dist/ (fast incremental)
 bun run typecheck  # strict TypeScript checks
 bun run test       # unit tests for the core logic
 bun run format     # Prettier
@@ -45,26 +63,14 @@ bun run format     # Prettier
 
 ## Tech stack
 
-- **Bun** — package manager, bundler, and test runner
-- **TypeScript** (strict) — all source
+- **Bun** — package manager, bundler, test runner, and asset pipeline
+- **TypeScript** (strict) — all source, no UI framework
+- **material-icon-theme** — VS Code file icons
+- **@fortawesome/\*** — UI icons
 - **webextension-polyfill** — cross-browser `browser.*` APIs
-- No runtime UI dependencies
 
-## Project layout
-
-See [`ARCHITECTURE.md`](./ARCHITECTURE.md) for a tour of the source tree and how
-the pieces fit together.
-
-## Roadmap
-
-- File-type icons and search/filter within the tree
-- Lazy subtree loading for very large repositories
-- Branch and tag switching from the header
-- Pull request and diff helpers
-
-## Contributing
-
-Contributions are welcome — see [`CONTRIBUTING.md`](./CONTRIBUTING.md).
+See [`ARCHITECTURE.md`](./ARCHITECTURE.md) for the source map and data flow, and
+[`CONTRIBUTING.md`](./CONTRIBUTING.md) to get involved.
 
 ## License
 

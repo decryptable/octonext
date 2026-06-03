@@ -4,7 +4,9 @@
   --fg: #1f2328;
   --muted: #59636e;
   --border: #d1d9e0;
+  --card: #f6f8fa;
   --accent: #2da44e;
+  --error: #cf222e;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -13,8 +15,14 @@
     --fg: #e6edf3;
     --muted: #9198a1;
     --border: #30363d;
+    --card: #161b22;
     --accent: #3fb950;
+    --error: #f85149;
   }
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
@@ -24,10 +32,31 @@ body {
   font: 14px/1.5 -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
+::selection {
+  background: color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border: 3px solid var(--bg);
+  border-radius: 8px;
+}
+
 .options {
-  max-width: 440px;
+  max-width: 520px;
   margin: 0 auto;
-  padding: 32px 24px;
+  padding: 32px 24px 48px;
+}
+
+.options__head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
 }
 
 .options__title {
@@ -36,47 +65,111 @@ body {
 }
 
 .options__subtitle {
-  margin: 4px 0 24px;
+  margin: 2px 0 0;
   color: var(--muted);
+}
+
+.card {
+  margin-bottom: 18px;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+}
+
+.card__title {
+  margin: 0 0 10px;
+  font-size: 15px;
+}
+
+.card__hint {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.card__hint a {
+  color: var(--accent);
+}
+
+.input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: inherit;
+  font: inherit;
+}
+
+.input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+  border-color: var(--accent);
 }
 
 .field {
-  margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: 130px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
 }
 
-.field__label {
-  display: block;
-  font-weight: 600;
-  margin-bottom: 6px;
-}
-
-.field__input {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 8px 10px;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  background: transparent;
-  color: inherit;
-}
-
-.field__hint {
-  margin: 6px 0 0;
+.field > span {
   color: var(--muted);
-  font-size: 12px;
+}
+
+.field .input {
+  width: 100%;
+}
+
+.range {
+  width: 100%;
+  accent-color: var(--accent);
+}
+
+.field__value {
+  min-width: 42px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
 }
 
 .toggle {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 0;
+  gap: 10px;
+  padding: 7px 0;
   cursor: pointer;
+}
+
+.toggle input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--accent);
+}
+
+.card__status {
+  margin: 8px 0 0;
+  font-size: 13px;
+  min-height: 18px;
+}
+
+.card__status[data-kind='ok'] {
+  color: var(--accent);
+}
+
+.card__status[data-kind='error'] {
+  color: var(--error);
+}
+
+.card__status[data-kind='pending'] {
+  color: var(--muted);
 }
 
 .options__status {
   height: 18px;
-  margin-top: 16px;
+  margin-top: 8px;
   color: var(--accent);
   font-weight: 600;
 }
