@@ -69,7 +69,7 @@ export class OctoNextApp {
   private onNavigate(url: URL): void {
     const next = this.adapter.getContext(url);
     document.documentElement.classList.toggle(ROOT_CLASS.hasRepo, Boolean(next));
-    this.sidebar.setTabVisible('pr', Boolean(next));
+    this.sidebar.setTabVisible('pr', next?.view === 'pull');
     if (sameRepoTarget(next, this.context)) return;
     this.context = next;
     this.bookmarks.syncStar();

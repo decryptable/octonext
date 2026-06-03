@@ -3,14 +3,10 @@ import { downloadNodes } from '../core/download';
 import type { IconResolver } from '../core/icons/icon-resolver';
 import type { RepoContext, RepoTree } from '../core/types';
 import type { Settings } from '../shared/settings';
-import { message } from '../ui/components/message';
 import { spinner } from '../ui/components/spinner';
 import type { Sidebar } from '../ui/sidebar/sidebar';
 import { buildErrorView } from './error-view';
 import { renderFiles, renderPull } from './render';
-
-const emptyPull = (): HTMLElement =>
-  message('info', 'Open a pull request to see its changed files and review comments.');
 
 export interface TreeControllerDeps {
   sidebar: Sidebar;
@@ -37,7 +33,6 @@ export class TreeController {
   async show(context: RepoContext): Promise<void> {
     await this.loadTree(context);
     if (context.view === 'pull') await this.loadPull(context);
-    else this.deps.sidebar.setPanel('pr', emptyPull());
   }
 
   private async loadTree(context: RepoContext): Promise<void> {
