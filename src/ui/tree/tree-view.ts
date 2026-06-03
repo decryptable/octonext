@@ -7,6 +7,8 @@ import { flagOpening } from '../effects';
 import { ancestorsOf } from './tree-paths';
 import { type NodeRow, createRow } from './tree-node';
 
+const ANIMATE_LIMIT = 60;
+
 export interface TreeViewOptions {
   root: TreeNode;
   currentPath: string;
@@ -109,7 +111,7 @@ export class TreeView {
     this.expanded.add(entry.node.path);
     entry.wrap.hidden = false;
     entry.row.setExpanded(true);
-    flagOpening(entry.wrap);
+    if (entry.node.children.length <= ANIMATE_LIMIT) flagOpening(entry.wrap);
   }
 
   private collapse(entry: Entry): void {
