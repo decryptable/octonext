@@ -5,6 +5,7 @@ import { buildAll } from './build';
 import { packCrx } from './crx';
 import { DIST_DIR, fromRoot } from './paths';
 import { loadSigningKey } from './signing-key';
+import { resolveVersion } from './version';
 
 const RELEASE_DIR = fromRoot('release');
 
@@ -46,10 +47,10 @@ async function packageFirefox(version: string): Promise<void> {
 }
 
 async function main(): Promise<void> {
-  const pkg = (await Bun.file(fromRoot('package.json')).json()) as { version: string };
+  const version = await resolveVersion();
   await mkdir(RELEASE_DIR, { recursive: true });
-  await packageFirefox(pkg.version);
-  await packageChrome(pkg.version);
+  await packageFirefox(version);
+  await packageChrome(version);
 }
 
 await main();

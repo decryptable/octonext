@@ -1,7 +1,7 @@
 import { cp, mkdir, readFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import { dirname, resolve } from 'node:path';
-import { DIST_DIR, OPTIONS_SRC_DIR, PUBLIC_DIR } from './paths';
+import { DIST_DIR, OPTIONS_SRC_DIR, PUBLIC_DIR, ROOT } from './paths';
 import { renderIcons } from './render-icons';
 import { collectThemeStyles } from './styles';
 
@@ -48,6 +48,14 @@ export async function copyFileIcons(): Promise<void> {
   await mkdir(resolve(DIST_DIR, 'icons/material'), { recursive: true });
   await cp(resolve(root, 'icons'), resolve(DIST_DIR, 'icons/material'), { recursive: true });
   await writeIconManifest(root);
+}
+
+export async function copyViraIcons(): Promise<void> {
+  const src = resolve(ROOT, 'vendor/vira');
+  const dest = resolve(DIST_DIR, 'icons/vira');
+  await mkdir(dest, { recursive: true });
+  await cp(resolve(src, 'icons'), dest, { recursive: true });
+  await cp(resolve(src, 'icons.json'), resolve(dest, 'icons.json'));
 }
 
 export async function copyAppIcons(): Promise<void> {

@@ -1,4 +1,3 @@
-import { ASSET_PATHS } from '../../shared/constants';
 import { browser } from '../../shared/browser';
 
 export interface IconManifest {
@@ -23,16 +22,20 @@ export const EMPTY_MANIFEST: IconManifest = {
   definitions: {},
 };
 
-let cache: Promise<IconManifest> | undefined;
+const cache = new Map<string, Promise<IconManifest>>();
 
-export function loadIconManifest(): Promise<IconManifest> {
-  cache ??= fetchManifest();
-  return cache;
+export function loadIconManifest(dir: string): Promise<IconManifest> {
+  let pending = cache.get(dir);
+  if (!pending) {
+    pending = fetchManifest(dir);
+    cache.set(dir, pending);
+  }
+  return pending;
 }
 
-async function fetchManifest(): Promise<IconManifest> {
+async function fetchManifest(dir: string): Promise<IconManifest> {
   try {
-    const url = browser.runtime.getURL(ASSET_PATHS.iconManifest);
+    const url = browser.runtime.getURL(`${dir}/icons.json`);
     const response = await fetch(url);
     return { ...EMPTY_MANIFEST, ...((await response.json()) as Partial<IconManifest>) };
   } catch {

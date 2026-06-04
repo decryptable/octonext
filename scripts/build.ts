@@ -2,9 +2,10 @@ import { watch as watchFs } from 'node:fs';
 import { mkdir, rm } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { type BuildTarget, buildManifest } from '../src/manifest.config';
-import { copyAppIcons, copyFileIcons, copyFonts, copyOptions } from './assets';
-import { DIST_DIR, SRC_DIR, fromRoot } from './paths';
+import { copyAppIcons, copyFileIcons, copyFonts, copyOptions, copyViraIcons } from './assets';
+import { DIST_DIR, SRC_DIR } from './paths';
 import { collectStyles } from './styles';
+import { resolveVersion } from './version';
 
 const WATCH = process.argv.includes('--watch');
 
@@ -37,8 +38,7 @@ async function bundleStyles(minify: boolean): Promise<void> {
 }
 
 async function writeManifest(target: BuildTarget): Promise<void> {
-  const pkg = (await Bun.file(fromRoot('package.json')).json()) as { version: string };
-  const manifest = buildManifest(pkg.version, target);
+  const manifest = buildManifest(await resolveVersion(), target);
   await Bun.write(resolve(DIST_DIR, 'manifest.json'), JSON.stringify(manifest, null, 2));
 }
 
@@ -54,7 +54,13 @@ async function rebuildCode(minify: boolean, target: BuildTarget): Promise<void> 
 export async function buildAll(target: BuildTarget = 'chrome', minify = true): Promise<void> {
   await rm(DIST_DIR, { recursive: true, force: true });
   await mkdir(DIST_DIR, { recursive: true });
-  await Promise.all([rebuildCode(minify, target), copyAppIcons(), copyFileIcons(), copyFonts()]);
+  await Promise.all([
+    rebuildCode(minify, target),
+    copyAppIcons(),
+    copyFileIcons(),
+    copyViraIcons(),
+    copyFonts(),
+  ]);
   console.log(`Built OctoNext (${target}) → ${DIST_DIR}`);
 }
 

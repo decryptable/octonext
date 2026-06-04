@@ -13,7 +13,10 @@ const SHARED = {
   host_permissions: ['https://api.github.com/*', 'https://github.com/*'],
   optional_host_permissions: ['http://*/*', 'https://*/*'],
   web_accessible_resources: [
-    { resources: ['icons/material/*', 'fonts/*', 'icon.svg'], matches: ['*://*/*'] },
+    {
+      resources: ['icons/material/*', 'icons/vira/*', 'fonts/*', 'icon.svg'],
+      matches: ['*://*/*'],
+    },
   ],
   content_scripts: [
     {

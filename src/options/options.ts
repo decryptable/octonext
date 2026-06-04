@@ -17,6 +17,7 @@ const SELECT_ITEMS: Record<SelectKey, SelectItem[]> = {
   font: FONTS,
   iconPack: [
     { id: 'material', label: 'Material (VS Code)' },
+    { id: 'vira', label: 'Vira' },
     { id: 'minimal', label: 'Minimal' },
   ],
   dock: [
@@ -115,6 +116,7 @@ async function main(): Promise<void> {
   preview.setTheme(settings.theme);
   preview.setFont(settings.font);
   preview.setFontSize(settings.fontSize);
+  await preview.setIconPack(settings.iconPack);
   bindToken(settings);
   bindSelects(settings, preview);
   bindFontSize(settings, preview);

@@ -1,0 +1,12 @@
+#octonext-root[data-octonext-theme='vira-teal'] {
+  --octonext-bg: #263238;
+  --octonext-fg: #d8dfdf;
+  --octonext-muted: #607d8b;
+  --octonext-border: #1c252a;
+  --octonext-hover: #2c3a41;
+  --octonext-active: #314048;
+  --octonext-accent: #80cbc4;
+  --octonext-add: #c3e88d;
+  --octonext-del: #f07178;
+  --octonext-shadow: rgba(0,0,0,0.5);
+}

@@ -1,7 +1,7 @@
 import { FONT_SIZE, SIDEBAR_WIDTH } from './constants';
 
 export type DockSide = 'left' | 'right';
-export type IconPack = 'material' | 'minimal';
+export type IconPack = 'material' | 'vira' | 'minimal';
 
 export interface Settings {
   accessToken: string;

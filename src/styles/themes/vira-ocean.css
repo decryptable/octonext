@@ -1,0 +1,12 @@
+#octonext-root[data-octonext-theme='vira-ocean'] {
+  --octonext-bg: #0f111a;
+  --octonext-fg: #ced1e3;
+  --octonext-muted: #4b526d;
+  --octonext-border: #090b10;
+  --octonext-hover: #161928;
+  --octonext-active: #1f2233;
+  --octonext-accent: #80cbc4;
+  --octonext-add: #c3e88d;
+  --octonext-del: #f07178;
+  --octonext-shadow: rgba(0,0,0,0.6);
+}
