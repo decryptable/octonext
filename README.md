@@ -10,13 +10,12 @@ backend and no telemetry.**
 
 <br />
 
-[![CI](https://github.com/decryptable/octonext/actions/workflows/ci.yml/badge.svg)](https://github.com/decryptable/octonext/actions/workflows/ci.yml)
-[![Version](https://img.shields.io/github/v/release/decryptable/octonext?color=2da44e&label=version)](https://github.com/decryptable/octonext/releases)
-[![License](https://img.shields.io/badge/license-MIT-3fb950)](./LICENSE)
-[![Manifest V3](https://img.shields.io/badge/manifest-v3-54aeff)](./src/manifest.config.ts)
-[![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178c6)](./tsconfig.json)
-[![Bun](https://img.shields.io/badge/Bun-%E2%89%A51.2-f0883e)](https://bun.sh)
-[![No telemetry](https://img.shields.io/badge/telemetry-none-8b949e)](#privacy)
+[![CI](https://img.shields.io/github/actions/workflow/status/decryptable/octonext/ci.yml?branch=main&style=flat-square&label=CI)](https://github.com/decryptable/octonext/actions/workflows/ci.yml)
+[![Version](https://img.shields.io/github/v/release/decryptable/octonext?style=flat-square&color=2da44e&label=version)](https://github.com/decryptable/octonext/releases)
+[![Manifest V3](https://img.shields.io/badge/manifest-v3-54aeff?style=flat-square)](./src/manifest.config.ts)
+[![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178c6?style=flat-square)](./tsconfig.json)
+[![Bun](https://img.shields.io/badge/Bun-%E2%89%A51.2-f0883e?style=flat-square)](https://bun.sh)
+[![No telemetry](https://img.shields.io/badge/telemetry-none-8b949e?style=flat-square)](#privacy)
 
 <br />
 
@@ -54,13 +53,6 @@ sent nowhere else.
 Stars over time and commit activity, not a wall of count badges.
 
 <div align="center">
-
-[![Stars](https://img.shields.io/github/stars/decryptable/octonext?style=flat-square&logo=github&color=2da44e&labelColor=0d1117)](https://github.com/decryptable/octonext/stargazers)
-[![Last commit](https://img.shields.io/github/last-commit/decryptable/octonext?style=flat-square&logo=git&color=8957e5&labelColor=0d1117)](https://github.com/decryptable/octonext/commits)
-[![Issues](https://img.shields.io/github/issues/decryptable/octonext?style=flat-square&logo=github&color=3fb950&labelColor=0d1117)](https://github.com/decryptable/octonext/issues)
-[![Top language](https://img.shields.io/github/languages/top/decryptable/octonext?style=flat-square&logo=typescript&color=3178c6&labelColor=0d1117)](#tech-stack)
-
-<br />
 
 <a href="https://star-history.com/#decryptable/octonext&Date">
   <img alt="Star history line chart" width="72%" src="https://api.star-history.com/svg?repos=decryptable/octonext&type=Date" />
