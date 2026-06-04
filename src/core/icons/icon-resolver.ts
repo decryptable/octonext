@@ -33,7 +33,10 @@ export class IconResolver {
   }
 
   fallbackFileUrl(): string {
-    return iconUrl(iconFileBase(this.manifest, this.manifest.file), this.dir ?? ICON_PACK_DIRS.material);
+    return iconUrl(
+      iconFileBase(this.manifest, this.manifest.file),
+      this.dir ?? ICON_PACK_DIRS.material,
+    );
   }
 
   fallbackFolderUrl(expanded: boolean): string {

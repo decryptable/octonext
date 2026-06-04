@@ -40,7 +40,13 @@ function header(): HTMLElement {
 function tabs(): HTMLElement {
   const tab = (label: string, active = false) =>
     h('span', { class: `${P}-tab${active ? ` ${P}-tab--active` : ''}`, text: label });
-  return h('div', { class: `${P}-tabs` }, tab('Files', true), tab('Pull Request'), tab('Bookmarks'));
+  return h(
+    'div',
+    { class: `${P}-tabs` },
+    tab('Files', true),
+    tab('Pull Request'),
+    tab('Bookmarks'),
+  );
 }
 
 function inlineIcon(item: Item): SVGElement {
