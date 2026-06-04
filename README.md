@@ -204,6 +204,8 @@ are to the GitHub API for the repository you are viewing. A personal access
 token, if you provide one, is stored in `chrome.storage` and sent **only** to
 GitHub. There is no analytics, no tracking, and no phone-home.
 
+Full privacy policy: **[decryptable.github.io/octonext](https://decryptable.github.io/octonext/)**
+
 ## Tech stack
 
 - **Bun** — package manager, bundler, test runner, and asset pipeline

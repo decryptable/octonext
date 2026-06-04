@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Privacy Policy — OctoNext</title>
+<meta name="description" content="Privacy policy for the OctoNext browser extension. OctoNext has no servers, no telemetry, and collects nothing. All data stays on your device." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%233fb950' d='M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38v-1.34c-2.23.49-2.7-1.08-2.7-1.08-.36-.92-.89-1.16-.89-1.16-.73-.5.05-.49.05-.49.81.06 1.23.83 1.23.83.72 1.22 1.87.87 2.33.66.07-.52.28-.87.5-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.13 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.03 2.2-.82 2.2-.82.44 1.11.16 1.93.08 2.13.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.74.54 1.49v2.2c0 .21.15.46.55.38A8 8 0 0 0 16 8c0-4.42-3.58-8-8-8z'/%3E%3C/svg%3E" />
+<style>
+  :root {
+    --bg: #0d1117; --panel: #161b22; --border: #30363d; --text: #e6edf3;
+    --muted: #9aa6b2; --green: #3fb950; --blue: #58a6ff; --accent: #7ee787;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background:
+      radial-gradient(90% 60% at 50% -10%, rgba(63,185,80,0.14), transparent 60%),
+      var(--bg);
+    color: var(--text); line-height: 1.65; -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 820px; margin: 0 auto; padding: 56px 22px 96px; }
+  header { display: flex; align-items: center; gap: 16px; margin-bottom: 8px; }
+  .mark { width: 56px; height: 56px; border-radius: 15px; display: grid; place-items: center; flex: none;
+    background: linear-gradient(160deg, #2ea043, #196c2e);
+    box-shadow: 0 8px 22px rgba(46,160,67,0.40), inset 0 1px 0 rgba(255,255,255,0.35); }
+  .mark svg { width: 36px; height: 36px; fill: #fff; }
+  h1 { font-size: 34px; font-weight: 800; letter-spacing: -0.5px; line-height: 1.1; }
+  h1 b { color: var(--green); }
+  .sub { color: var(--muted); font-size: 15px; margin-top: 2px; }
+  .meta { color: var(--muted); font-size: 13.5px; margin: 18px 0 30px; padding-bottom: 22px; border-bottom: 1px solid var(--border); }
+  .tldr { background: var(--panel); border: 1px solid var(--border); border-left: 4px solid var(--green);
+    border-radius: 12px; padding: 18px 20px; margin-bottom: 36px; }
+  .tldr strong { color: var(--accent); }
+  h2 { font-size: 21px; font-weight: 700; margin: 38px 0 12px; letter-spacing: -0.2px; }
+  h2 .n { color: var(--green); font-variant-numeric: tabular-nums; margin-right: 8px; }
+  h3 { font-size: 16px; font-weight: 700; margin: 22px 0 6px; color: #cdd9e5; }
+  p { margin: 10px 0; color: #d3dae3; }
+  ul { margin: 10px 0 10px 4px; padding-left: 22px; }
+  li { margin: 7px 0; color: #d3dae3; }
+  a { color: var(--blue); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code { background: #1f2630; border: 1px solid var(--border); border-radius: 6px; padding: 1px 6px;
+    font-family: ui-monospace, SFMono-Regular, "Cascadia Code", Consolas, monospace; font-size: 0.9em; color: #c9d1d9; }
+  table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 14.5px; }
+  th, td { text-align: left; padding: 10px 12px; border: 1px solid var(--border); vertical-align: top; }
+  th { background: var(--panel); color: #cdd9e5; font-weight: 600; }
+  td code { white-space: nowrap; }
+  .ok { color: var(--accent); font-weight: 700; }
+  footer { margin-top: 56px; padding-top: 22px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13.5px; }
+  footer a { color: var(--blue); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="mark">
+      <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38v-1.34c-2.23.49-2.7-1.08-2.7-1.08-.36-.92-.89-1.16-.89-1.16-.73-.5.05-.49.05-.49.81.06 1.23.83 1.23.83.72 1.22 1.87.87 2.33.66.07-.52.28-.87.5-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.13 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.03 2.2-.82 2.2-.82.44 1.11.16 1.93.08 2.13.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.74.54 1.49v2.2c0 .21.15.46.55.38A8 8 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+    </div>
+    <div>
+      <h1>Octo<b>Next</b> — Privacy Policy</h1>
+      <div class="sub">A code tree sidebar for GitHub</div>
+    </div>
+  </header>
+
+  <div class="meta">Effective date: <strong>4 June 2026</strong> · Last updated: <strong>4 June 2026</strong></div>
+
+  <div class="tldr">
+    <strong>In short:</strong> OctoNext has no servers, runs entirely in your browser, and
+    <strong>collects nothing</strong>. There is no analytics, no tracking, and no telemetry. The only
+    network requests it makes go to GitHub's own API for the repository you are viewing. Your settings,
+    bookmarks, and optional access token never leave your device, and are never sent to the developer.
+  </div>
+
+  <h2><span class="n">1.</span>Who this applies to</h2>
+  <p>This policy describes how the <strong>OctoNext</strong> browser extension ("OctoNext", "the extension",
+  "we") handles information. OctoNext adds a collapsible file-tree sidebar to GitHub repository pages so you
+  can browse, search, download, and review code without full page reloads. It is free and open source.</p>
+
+  <h2><span class="n">2.</span>What data OctoNext handles</h2>
+  <p>OctoNext stores a small amount of data <strong>locally on your device only</strong>, using the browser's
+  extension storage (<code>chrome.storage</code>). None of it is transmitted to us or to any third party.</p>
+  <table>
+    <tr><th>Data</th><th>Why it exists</th><th>Where it lives</th></tr>
+    <tr><td>Preferences (theme, font, font size, sidebar width, dock side, pinned state)</td><td>Remember how you like the sidebar</td><td>Local device only</td></tr>
+    <tr><td>Repository bookmarks</td><td>Let you jump back to repositories you save</td><td>Local device only</td></tr>
+    <tr><td>Optional GitHub personal access token (PAT)</td><td>Access <em>your</em> private repositories, only if you choose to add one</td><td>Local device only</td></tr>
+    <tr><td>Per-domain GitHub Enterprise opt-in</td><td>Remember Enterprise hosts you explicitly enabled</td><td>Local device only</td></tr>
+  </table>
+
+  <h2><span class="n">3.</span>What OctoNext does <em>not</em> do</h2>
+  <ul>
+    <li>It does <span class="ok">not</span> collect, transmit, or sell any personal data.</li>
+    <li>It has <span class="ok">no</span> backend server, analytics, tracking pixels, or telemetry.</li>
+    <li>It does <span class="ok">not</span> read your browsing history or activity on non-GitHub sites.</li>
+    <li>It does <span class="ok">not</span> execute remote code — all code is bundled inside the extension package.</li>
+    <li>It does <span class="ok">not</span> share data with any third party other than GitHub, as described below.</li>
+  </ul>
+
+  <h2><span class="n">4.</span>Network requests &amp; third parties</h2>
+  <p>The only external service OctoNext contacts is <strong>GitHub</strong>:</p>
+  <ul>
+    <li>OctoNext calls the <strong>GitHub REST API</strong> (<code>api.github.com</code>, or your GitHub
+    Enterprise host) to read the repository structure, file contents, sizes, and pull-request details for
+    the repository you are currently viewing.</li>
+    <li>If you provide a personal access token, it is sent <strong>only</strong> to GitHub, as the
+    authentication header for those same API requests — exactly as if you signed in to GitHub yourself. It
+    is never sent anywhere else.</li>
+  </ul>
+  <p>Your use of GitHub is governed by
+  <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" rel="noreferrer">GitHub's own privacy statement</a>.</p>
+
+  <h2><span class="n">5.</span>Permissions &amp; why they are needed</h2>
+  <table>
+    <tr><th>Permission</th><th>Why OctoNext needs it</th></tr>
+    <tr><td><code>storage</code></td><td>Save your settings, bookmarks, and optional token locally.</td></tr>
+    <tr><td><code>activeTab</code></td><td>Act on the GitHub tab you are actively viewing when you open the sidebar.</td></tr>
+    <tr><td><code>scripting</code></td><td>Inject the sidebar into GitHub pages (Manifest V3 requirement), including after in-page navigations.</td></tr>
+    <tr><td><code>tabs</code></td><td>Read the active tab's URL to know which repository or pull request is shown. Not used for history.</td></tr>
+    <tr><td><code>contextMenus</code></td><td>Provide a right-click option to enable a GitHub Enterprise domain, keeping host access opt-in.</td></tr>
+    <tr><td>Host access to <code>github.com</code> &amp; <code>api.github.com</code></td><td>Render the sidebar on repository pages and fetch repository data from the API.</td></tr>
+    <tr><td>Optional broad host access (<code>http://*/*</code>, <code>https://*/*</code>)</td><td>Requested at runtime <em>only</em> when you explicitly enable a self-hosted GitHub Enterprise domain.</td></tr>
+  </table>
+
+  <h2><span class="n">6.</span>Data retention &amp; deletion</h2>
+  <p>Because all data is stored locally, you are always in control:</p>
+  <ul>
+    <li>Settings and bookmarks persist on your device until you change or remove them.</li>
+    <li>You can clear the saved token at any time from the extension's options page.</li>
+    <li>Removing (uninstalling) the extension deletes all of its locally stored data.</li>
+  </ul>
+
+  <h2><span class="n">7.</span>Children</h2>
+  <p>OctoNext is a general-purpose developer tool and is not directed to children. It does not knowingly
+  collect any data from anyone, regardless of age.</p>
+
+  <h2><span class="n">8.</span>Compliance with the Chrome Web Store policies</h2>
+  <p>OctoNext complies with the
+  <a href="https://developer.chrome.com/docs/webstore/program-policies/" rel="noreferrer">Chrome Web Store Developer Program Policies</a>,
+  including the Limited Use requirements. Specifically:</p>
+  <ul>
+    <li>We do <strong>not</strong> sell or transfer user data to third parties, except as needed to provide
+    the single purpose of the extension (communicating with GitHub on your behalf).</li>
+    <li>We do <strong>not</strong> use or transfer user data for purposes unrelated to the extension's single
+    purpose.</li>
+    <li>We do <strong>not</strong> use or transfer user data to determine creditworthiness or for lending
+    purposes.</li>
+  </ul>
+
+  <h2><span class="n">9.</span>Changes to this policy</h2>
+  <p>If this policy changes, the updated version will be published at this same URL with a new "Last updated"
+  date. Material changes will be noted in the project's release notes.</p>
+
+  <h2><span class="n">10.</span>Contact</h2>
+  <p>Questions or concerns? Open an issue on the project repository:</p>
+  <ul>
+    <li>Repository: <a href="https://github.com/decryptable/octonext" rel="noreferrer">github.com/decryptable/octonext</a></li>
+    <li>Issues: <a href="https://github.com/decryptable/octonext/issues" rel="noreferrer">github.com/decryptable/octonext/issues</a></li>
+  </ul>
+
+  <footer>
+    OctoNext is free and open source under the MIT license · © 2026
+    <a href="https://github.com/decryptable" rel="noreferrer">decryptable</a>.
+    This page is published via GitHub Pages and updates automatically on every push.
+  </footer>
+</div>
+</body>
+</html>
